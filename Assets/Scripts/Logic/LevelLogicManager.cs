@@ -56,7 +56,8 @@ namespace Logic
             throw new NotImplementedException();
         }
 
-        private void HandleWeedSpawn(Grid grid, float currentWeedSpawnRate, float timeSinceLastSpawn)
+        private void HandleWeedSpawn(Grid grid, float currentWeedSpawnRate, 
+            float timeSinceLastSpawn, LevelGenerator levelGenerator)
         {
             throw new NotImplementedException();
         }
