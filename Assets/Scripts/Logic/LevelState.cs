@@ -86,8 +86,10 @@ namespace Logic
         [Header("World Settings")]
         public float WeedInitialSpawnTime;
         public float WeedSpawnSpeedCurvePercent;
-		private const int InitialRocks = 40;
-		private const int InitialWeeds = 40;
+		public int InitialRocks;
+		public int InitialWeeds;
+        public int GridWidth;
+        public int GridHeight;
     }
 
     public struct PlayerInput

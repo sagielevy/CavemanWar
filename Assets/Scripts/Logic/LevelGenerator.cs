@@ -21,6 +21,11 @@ namespace Logic {
             throw new NotImplementedException();
         }
 
+		private Vector2Int GenerateRandomPosInGrid()
+		{
+			throw new NotImplementedException();
+		}
+
         private Player InitialPlayer1State(LevelSettings settings)
 		{
             return new Player(settings.InitialHP, settings.InitialPlayer1Pos, Direction.Right);
