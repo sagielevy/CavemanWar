@@ -4,12 +4,6 @@ using UnityEngine;
 namespace Logic {
 	public struct LevelGenerator
 	{
-		private const int InitialHP = 3;
-		private Vector2Int InitialPlayer1Pos {get => new Vector2Int(0, 7);}
-		private Vector2Int InitialPlayer2Pos {get => new Vector2Int(15, 7);}
-		private const int InitialRocks = 40;
-		private const int InitialWeeds = 40;
-
 		/// <summary>
 		/// Makes new grid with all static tiles and some weeds.
 		/// </summary>
@@ -17,8 +11,8 @@ namespace Logic {
 		public LevelState InitialState(LevelSettings settings)
 		{
             var grid = InitialGridState(settings);
-            var player1 = InitialPlayer1State();
-            var player2 = InitialPlayer2State();
+            var player1 = InitialPlayer1State(settings);
+            var player2 = InitialPlayer2State(settings);
             return new LevelState(grid, player1, player2);
         }
 
@@ -27,14 +21,14 @@ namespace Logic {
             throw new NotImplementedException();
         }
 
-        private Player InitialPlayer1State()
+        private Player InitialPlayer1State(LevelSettings settings)
 		{
-            return new Player(InitialHP, InitialPlayer1Pos, Direction.Right);
+            return new Player(settings.InitialHP, settings.InitialPlayer1Pos, Direction.Right);
         }
 
-        private Player InitialPlayer2State()
+        private Player InitialPlayer2State(LevelSettings settings)
         {
-            return new Player(InitialHP, InitialPlayer2Pos, Direction.Left);
+            return new Player(settings.InitialHP, settings.InitialPlayer2Pos, Direction.Left);
         }
 
         /// <summary>

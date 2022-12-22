@@ -68,16 +68,26 @@ namespace Logic
     [Serializable]
     public struct LevelSettings
     {
-        public float WeedInitialSpawnTime;
-        public float WeedSpawnSpeedCurvePercent;
+        [Header("Objects Settings")]
         public float WeedBurnTime;
         public float GroudBurnTime;
         public float WeedPickupTime;
         public float WeedCatchFireTime;
         public int FlamethrowerRange;
-        public float InvincibiltyFramesTime;
         public float AttackCooldown;
+
+        [Header("Player Settings")]
+        public float InvincibiltyFramesTime;
         public float PlayerTileMoveTime;
+        public int InitialHP;
+		public Vector2Int InitialPlayer1Pos;
+		public Vector2Int InitialPlayer2Pos;
+        
+        [Header("World Settings")]
+        public float WeedInitialSpawnTime;
+        public float WeedSpawnSpeedCurvePercent;
+		private const int InitialRocks = 40;
+		private const int InitialWeeds = 40;
     }
 
     public struct PlayerInput
