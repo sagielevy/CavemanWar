@@ -96,6 +96,7 @@ namespace Logic
         [Header("Player Settings")]
         public float InvincibiltyFramesTime;
         public float PlayerTileMoveTime;
+        public float PlayerAttackTime;
         public int InitialHP;
 		public Vector2Int InitialPlayer1Pos;
 		public Vector2Int InitialPlayer2Pos;
@@ -154,12 +155,17 @@ namespace Logic
         public Grid grid;
         public Player player1;
         public Player player2;
+        public float currentWeedSpawnRate;
+        public float timeSinceLastSpawn;
 
-        public LevelState(Grid grid, Player player1, Player player2)
+        public LevelState(Grid grid, Player player1, Player player2, float currentWeedSpawnRate,
+            float timeSinceLastSpawn)
         {
             this.grid = grid;
             this.player1 = player1;
             this.player2 = player2;
+            this.currentWeedSpawnRate = currentWeedSpawnRate;
+            this.timeSinceLastSpawn = timeSinceLastSpawn;
         }
     }
 }

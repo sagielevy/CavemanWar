@@ -13,7 +13,7 @@ namespace Logic {
             var grid = InitialGridState(settings);
             var player1 = InitialPlayer1State(settings);
             var player2 = InitialPlayer2State(settings);
-            return new LevelState(grid, player1, player2);
+            return new LevelState(grid, player1, player2, settings.WeedInitialSpawnTime, 0);
         }
 
 		private Grid InitialGridState(LevelSettings settings)
@@ -28,7 +28,7 @@ namespace Logic {
 		{
 			for (int i = 0; i <= settings.InitialRocks; i++)
 			{
-				Vector2Int pos = GenerateRandomPosInGrid(settings.GridWidth, settings.GridHeight);
+				Vector2Int pos = GenerateRandomPosInGrid(grid, settings.GridWidth, settings.GridHeight);
 				if (pos != settings.InitialPlayer1Pos && pos != settings.InitialPlayer2Pos)
 				{
 					grid.tiles[pos.x, pos.y] = new Rock();
@@ -40,7 +40,7 @@ namespace Logic {
 		{
 			for (int i = 0; i <= settings.InitialWeeds; i++)
 			{
-				Vector2Int pos = GenerateRandomPosInGrid(settings.GridWidth, settings.GridHeight);
+				Vector2Int pos = GenerateRandomPosInGrid(grid, settings.GridWidth, settings.GridHeight);
 				if (pos != settings.InitialPlayer1Pos && pos != settings.InitialPlayer2Pos)
 				{
 					grid.tiles[pos.x, pos.y] = new Weed();
@@ -48,9 +48,20 @@ namespace Logic {
 			}
 		}
 
-		private Vector2Int GenerateRandomPosInGrid(int width, int height)
+		private Vector2Int GenerateRandomPosInGrid(Grid grid, int width, int height)
 		{
-			return new Vector2Int(UnityEngine.Random.Range(0, width), UnityEngine.Random.Range(0, height));
+			var index = new Vector2Int(UnityEngine.Random.Range(0, width),
+				UnityEngine.Random.Range(0, height));
+			var tileAtIndex = grid.tiles[index.x, index.y];
+
+            while (tileAtIndex is Weed || tileAtIndex is Rock)
+			{
+                index = new Vector2Int(UnityEngine.Random.Range(0, width),
+					UnityEngine.Random.Range(0, height));
+                tileAtIndex = grid.tiles[index.x, index.y];
+            }
+
+			return index;
 		}
 
         private Player InitialPlayer1State(LevelSettings settings)
@@ -69,7 +80,7 @@ namespace Logic {
         /// <param name="previousState"></param>
         /// <param name="deltaTime"></param>
         /// <returns></returns>
-        public Grid SpawnNewWeeds(Grid previousState, LevelSettings settings,
+        public Grid SpawnNewWeeds(LevelState previousState, LevelSettings settings,
 			float deltaTime)
 		{
 			throw new NotImplementedException();

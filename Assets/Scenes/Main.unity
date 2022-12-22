@@ -170,19 +170,20 @@ MonoBehaviour:
   GroundFirePrefab: {fileID: 936983270864893514, guid: e62129dd5832f4427b26c4ed6debcbc6, type: 3}
   LevelSettings:
     WeedBurnTime: 0.3
-    GroundBurnTime: 0
+    GroundBurnTime: 0.15
     WeedPickupTime: 0.15
     WeedCatchFireTime: 0.2
     FlamethrowerRange: 3
-    AttackCooldown: 0.1
+    AttackCooldown: 0.15
     InvincibiltyFramesTime: 0.25
     PlayerTileMoveTime: 0.15
+    PlayerAttackTime: 0.15
     InitialHP: 3
     InitialPlayer1Pos: {x: 0, y: 7}
     InitialPlayer2Pos: {x: 13, y: 7}
     WeedInitialSpawnTime: 0.1
     WeedSpawnSpeedCurvePercent: 0.01
-    InitialRocks: 30
+    InitialRocks: 15
     InitialWeeds: 10
     GridWidth: 18
     GridHeight: 10
@@ -219,7 +220,7 @@ MonoBehaviour:
   Rock1Prefab: {fileID: 2038398096141788844, guid: 5ba8aac7568e04c29bd9dda809ab9ebe, type: 3}
   Rock2Prefab: {fileID: 2038398096141788844, guid: 62991225404b04727be4a194a9d0232a, type: 3}
   Player1Prefab: {fileID: 3509710860213584405, guid: 07395fdaf048a4a65a89d5a90af0d758, type: 3}
-  Player2Prefab: {fileID: 3509710860213584405, guid: 786dfe3224a2945c5bffb043117f0877, type: 3}
+  Player2Prefab: {fileID: 2833343780524039197, guid: 6bccaa8a711a7f2438a330d9f5466c60, type: 3}
 --- !u!4 &1396767845
 Transform:
   m_ObjectHideFlags: 0
