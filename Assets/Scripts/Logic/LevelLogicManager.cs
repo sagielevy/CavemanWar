@@ -10,4 +10,9 @@ public struct LevelLogicManager
     {
         throw new NotImplementedException();
     }
+
+    public bool IsPlayerMoving(Player playerState)
+    {
+        throw new NotImplementedException();
+    }
 }

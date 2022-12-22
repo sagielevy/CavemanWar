@@ -17,7 +17,7 @@ public struct Player
     public int Fuel;
     public float? TimeSinceLastHit;
     public float? TimeSinceLastAttack;
-    public float IdleTime;
+    public float? TimeSinceLastMove;
     public Vector2Int position;
     public Direction orientation;
 }
@@ -57,6 +57,7 @@ public struct LevelSettings
     public int FlamethrowerRange;
     public float IFramesTime;
     public float AttackCooldown;
+    public float PlayerTileMoveTime;
 }
 
 public struct PlayerInput
