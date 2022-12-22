@@ -169,16 +169,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundFirePrefab: {fileID: 936983270864893514, guid: e62129dd5832f4427b26c4ed6debcbc6, type: 3}
   LevelSettings:
-    WeedInitialSpawnTime: 0.1
-    WeedSpawnSpeedCurvePercent: 0.01
     WeedBurnTime: 0.3
-    GroudBurnTime: 0.1
+    GroundBurnTime: 0
     WeedPickupTime: 0.15
     WeedCatchFireTime: 0.2
     FlamethrowerRange: 3
-    InvincibiltyFramesTime: 0.25
     AttackCooldown: 0.1
+    InvincibiltyFramesTime: 0.25
     PlayerTileMoveTime: 0.15
+    InitialHP: 3
+    InitialPlayer1Pos: {x: 0, y: 7}
+    InitialPlayer2Pos: {x: 13, y: 7}
+    WeedInitialSpawnTime: 0.1
+    WeedSpawnSpeedCurvePercent: 0.01
+    InitialRocks: 15
+    InitialWeeds: 10
+    GridWidth: 14
+    GridHeight: 8
 --- !u!1 &1396767843
 GameObject:
   m_ObjectHideFlags: 0
