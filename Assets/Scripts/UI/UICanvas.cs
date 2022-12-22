@@ -13,7 +13,6 @@ public class UICanvas : MonoBehaviour
     public float mainDest = 0f;    //ydest for the main menu canvas to lerp to
     public float overDest = 0f;    //ydest for the game over canvas to lerp to
     public float screenH = 500f;
-    private string baseString = "player 2 won";
 
     // Start is called before the first frame update
     void Start()

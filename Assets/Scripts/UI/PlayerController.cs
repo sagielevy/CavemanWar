@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Logic;
+using DG.Tweening;
 
 namespace UI
 {
@@ -12,7 +13,9 @@ namespace UI
         [SerializeField] private SFXmanager SFXmanager;
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
-        [SerializeField] private List<SpriteRenderer> hearts = new List<SpriteRenderer>();
+        [SerializeField] private float walkingSpeed = 0.5f;
+        
+        private SpriteRenderer[] hearts;
 
         private Logic.Player lastPlayerState;
         private LevelLogicManager logicManager;
@@ -23,6 +26,11 @@ namespace UI
         public void IFrame(bool isInIFrame)
         {
             this.isInIFrame = isInIFrame;
+        }
+
+        public void Setup(SpriteRenderer[] hearts)
+        {
+            this.hearts = hearts;
         }
 
         public void Start()
@@ -52,8 +60,6 @@ namespace UI
         {
             logicManager = manager;
 
-            /// send data to the animation controller ///
-
             //direction
             if(currentPlayerState.orientation != previousPlayerState.orientation)
                 playerAnimator.SetFloat("direction",(int)currentPlayerState.orientation);
@@ -63,6 +69,13 @@ namespace UI
                 playerAnimator.SetBool("isWalking",manager.IsPlayerMoving(currentPlayerState));
             isWalking = manager.IsPlayerMoving(currentPlayerState);
             
+            //trigger dotween animation
+            if(currentPlayerState.position != previousPlayerState.position)
+            {
+                Vector2Int dest = currentPlayerState.position;
+                transform.DOMove(new Vector3(dest.x, dest.y, 0f),walkingSpeed);
+            }
+
             //flipx when facing left
             playerSprite.flipX = currentPlayerState.orientation == Direction.Left;
 

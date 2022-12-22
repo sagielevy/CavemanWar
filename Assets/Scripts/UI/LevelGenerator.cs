@@ -19,9 +19,16 @@ namespace UI
             var player1Position = new Vector3(levelState.player1.position.x,
                 levelState.player1.position.y);
             var player1 = Instantiate(Player1Prefab, player1Position, Quaternion.identity, parent);
+
+            var hearts = GameObject.FindWithTag("Hearts1").GetComponentsInChildren<SpriteRenderer>();
+            player1.Setup(hearts);
+
             var player2Position = new Vector3(levelState.player2.position.x,
                 levelState.player2.position.y);
             var player2 = Instantiate(Player2Prefab, player2Position, Quaternion.identity, parent);
+
+            hearts = GameObject.FindWithTag("Hearts2").GetComponentsInChildren<SpriteRenderer>();
+            player1.Setup(hearts);
 
             var width = levelState.grid.tiles.GetLength(0);
             var height = levelState.grid.tiles.GetLength(1);
