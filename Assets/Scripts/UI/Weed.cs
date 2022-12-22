@@ -7,11 +7,11 @@ namespace UI
 	public class Weed : MonoBehaviour
 	{
         [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private SpriteRenderer fireRenderer;
+        [SerializeField] private Animator fireAnimator;
 
-        public void Burn()
-		{
-			throw new NotImplementedException();
+        public void Burn(bool isBurning)
+        {
+            fireAnimator.SetBool("IsBurning", isBurning);
         }
     }
 }

@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 280563703}
+  - component: {fileID: 280563704}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -154,6 +155,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &280563704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280563702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f02fa0a657a47f19defa02a424d404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundFirePrefab: {fileID: 936983270864893514, guid: e62129dd5832f4427b26c4ed6debcbc6, type: 3}
+  LevelSettings:
+    WeedInitialSpawnTime: 0.1
+    WeedSpawnSpeedCurvePercent: 0.01
+    WeedBurnTime: 0.3
+    GroudBurnTime: 0.1
+    WeedPickupTime: 0.15
+    WeedCatchFireTime: 0.2
+    FlamethrowerRange: 3
+    InvincibiltyFramesTime: 0.25
+    AttackCooldown: 0.1
+    PlayerTileMoveTime: 0.15
 --- !u!1 &1396767843
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,11 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca848bd5983f412ebe74bf215cc83a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitDistance: 1
   WeedPrefab: {fileID: 5689169207849309636, guid: 37c74e6de7a4342b9a524633acd5edde, type: 3}
-  GroundPrefab: {fileID: 9135697131474031049, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
   Rock1Prefab: {fileID: 2038398096141788844, guid: 5ba8aac7568e04c29bd9dda809ab9ebe, type: 3}
   Rock2Prefab: {fileID: 2038398096141788844, guid: 62991225404b04727be4a194a9d0232a, type: 3}
-  PlayerPrefab: {fileID: 8300375878182298642, guid: 07395fdaf048a4a65a89d5a90af0d758, type: 3}
+  Player1Prefab: {fileID: 3509710860213584405, guid: 07395fdaf048a4a65a89d5a90af0d758, type: 3}
+  Player2Prefab: {fileID: 3509710860213584405, guid: 786dfe3224a2945c5bffb043117f0877, type: 3}
 --- !u!4 &1396767845
 Transform:
   m_ObjectHideFlags: 0
@@ -203,6 +229,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1592409972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592409973}
+  - component: {fileID: 1592409974}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1592409973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592409972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.050550617, y: -0.03983099, z: -0.0009785189}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592409974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592409972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aadaec673c10491eb24e6d90d7e6ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2021524182
 GameObject:
   m_ObjectHideFlags: 0
