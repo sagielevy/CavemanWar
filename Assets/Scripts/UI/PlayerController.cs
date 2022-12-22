@@ -16,7 +16,7 @@ namespace UI
             this.isInIFrame = isInIFrame;
         }
 
-        public void UpdateAnimation(Logic.Player previousPlayerState,
+        public void UpdatePlayer(Logic.Player previousPlayerState,
             Logic.Player currentPlayerState, LevelSettings levelSettings)
         {
             throw new NotImplementedException();

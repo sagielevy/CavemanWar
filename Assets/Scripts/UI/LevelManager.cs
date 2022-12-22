@@ -7,23 +7,31 @@ namespace UI
 {
     public class LevelManager : MonoBehaviour
     {
-        [SerializeField] private GroundFire GroundPrefab;
+        [SerializeField] private GroundFire GroundFirePrefab;
         [SerializeField] private LevelSettings LevelSettings;
 
-        private LevelGenerator LevelTilesGenerator;
+        private LevelGenerator LevelObjectsGenerator;
         private Logic.LevelLogicManager LevelLogicManager;
         private Logic.LevelGenerator LevelStateGenerator;
+
+        private PlayerController player1;
+        private PlayerController player2;
+        private Transform[,] grid;
 
         private LevelState LevelState;
 
         private void Start()
         {
             LevelStateGenerator = new Logic.LevelGenerator();
-            LevelTilesGenerator = FindObjectOfType<LevelGenerator>();
+            LevelObjectsGenerator = FindObjectOfType<LevelGenerator>();
             LevelLogicManager = new LevelLogicManager(LevelSettings);
 
             LevelState = LevelStateGenerator.InitialState(LevelSettings);
-            LevelTilesGenerator.GenerateInitialLevel(transform, LevelState, LevelSettings);
+            var objects = LevelObjectsGenerator.GenerateInitialLevel(transform,
+                LevelState, LevelSettings);
+            player1 = objects.Item1;
+            player2 = objects.Item2;
+            grid = objects.Item3;
         }
 
         private void Update()
@@ -104,7 +112,21 @@ namespace UI
 
         private void UpdateLevelObjects(LevelState previousLevelState)
         {
-            throw new NotImplementedException();
+            player1.UpdatePlayer(LevelState.player1, previousLevelState.player1,
+                LevelSettings);
+            player2.UpdatePlayer(LevelState.player2, previousLevelState.player2,
+                LevelSettings);
+
+            for (int i = 0; i < LevelState.grid.tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < LevelState.grid.tiles.GetLength(1); j++)
+                {
+                    var prevTile = previousLevelState.grid.tiles[i, j];
+                    var currTile = LevelState.grid.tiles[i, j];
+
+                    throw new NotImplementedException();
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Logic;
+using System;
 
 namespace UI
 {
@@ -13,19 +14,23 @@ namespace UI
         [SerializeField] private PlayerController Player1Prefab;
         [SerializeField] private PlayerController Player2Prefab;
 
-        public void GenerateInitialLevel(Transform parent,
+        public Tuple<PlayerController, PlayerController, Transform[,]> GenerateInitialLevel(Transform parent,
             LevelState levelState, LevelSettings settings)
         {
             var player1Position = new Vector3(levelState.player1.position.x,
                 levelState.player1.position.y);
-            Instantiate(Player1Prefab, player1Position, Quaternion.identity, parent);
+            var player1 = Instantiate(Player1Prefab, player1Position, Quaternion.identity, parent);
             var player2Position = new Vector3(levelState.player2.position.x,
                 levelState.player2.position.y);
-            Instantiate(Player2Prefab, player2Position, Quaternion.identity, parent);
+            var player2 = Instantiate(Player2Prefab, player2Position, Quaternion.identity, parent);
 
-            for (int i = 0; i < levelState.grid.tiles.GetLength(0); i++)
+            var width = levelState.grid.tiles.GetLength(0);
+            var height = levelState.grid.tiles.GetLength(1);
+            Transform[,] grid = new Transform[width, height];
+
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < levelState.grid.tiles.GetLength(1); j++)
+                for (int j = 0; j < height; j++)
                 {
                     var tile = levelState.grid.tiles[i, j];
                     var position = new Vector3(i * UnitDistance, j * UnitDistance);
@@ -33,10 +38,11 @@ namespace UI
                     switch (tile)
                     {
                         case Logic.Weed:
-                            Instantiate(WeedPrefab, position, Quaternion.identity, parent);
+                            grid[i, j] = Instantiate(WeedPrefab, position,
+                                Quaternion.identity, parent).transform;
                             break;
                         case Logic.Rock:
-                            var rand = Random.Range(0, 1);
+                            var rand = UnityEngine.Random.Range(0, 1);
                             Transform rockPrefab;
 
                             if (rand < 0.5f)
@@ -48,11 +54,14 @@ namespace UI
                                 rockPrefab = Rock2Prefab;
                             }
 
-                            Instantiate(rockPrefab, position, Quaternion.identity, parent);
+                            grid[i, j] = Instantiate(rockPrefab, position,
+                                Quaternion.identity, parent).transform;
                             break;
                     }
                 }
             }
+
+            return new(player1, player2, grid);
         }
     }
 }

@@ -167,18 +167,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f02fa0a657a47f19defa02a424d404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundPrefab: {fileID: 0}
+  GroundFirePrefab: {fileID: 936983270864893514, guid: e62129dd5832f4427b26c4ed6debcbc6, type: 3}
   LevelSettings:
     WeedInitialSpawnTime: 0.1
-    WeedSpawnSpeedCurvePercent: 0
-    WeedBurnTime: 0
-    GroudBurnTime: 0
-    WeedPickupTime: 0
-    WeedCatchFireTime: 0
-    FlamethrowerRange: 0
-    InvincibiltyFramesTime: 0
-    AttackCooldown: 0
-    PlayerTileMoveTime: 0
+    WeedSpawnSpeedCurvePercent: 0.01
+    WeedBurnTime: 0.3
+    GroudBurnTime: 0.1
+    WeedPickupTime: 0.15
+    WeedCatchFireTime: 0.2
+    FlamethrowerRange: 3
+    InvincibiltyFramesTime: 0.25
+    AttackCooldown: 0.1
+    PlayerTileMoveTime: 0.15
 --- !u!1 &1396767843
 GameObject:
   m_ObjectHideFlags: 0
