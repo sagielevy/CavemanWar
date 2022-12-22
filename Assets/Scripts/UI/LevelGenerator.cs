@@ -8,7 +8,8 @@ namespace UI
 	{
 		[SerializeField] private Weed WeedPrefab;
         [SerializeField] private Ground GroundPrefab;
-        [SerializeField] private Transform RockPrefab;
+        [SerializeField] private Transform Rock1Prefab;
+        [SerializeField] private Transform Rock2Prefab;
         [SerializeField] private Player PlayerPrefab;
 
         public void GenerateInitialLevel(Transform parent,
@@ -17,7 +18,8 @@ namespace UI
             throw new System.Exception();
         }
 
-        public void SpwanNewWeeds(LevelSettings LevelSettings)
+        public void SpwanNewWeeds(LevelState levelState,
+            LevelSettings LevelSettings)
         {
             throw new System.Exception();
         }
