@@ -21,9 +21,10 @@ namespace Logic {
             throw new NotImplementedException();
         }
 
-		private Vector2Int GenerateRandomPosInGrid()
+		private Vector2Int GenerateRandomPosInGrid(Grid grid)
 		{
-			throw new NotImplementedException();
+			// return new Vector2Int(UnityEngine.Random.RandomRange(0, grid.))
+            throw new NotImplementedException();
 		}
 
         private Player InitialPlayer1State(LevelSettings settings)

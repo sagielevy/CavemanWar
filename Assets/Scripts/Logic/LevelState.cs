@@ -55,7 +55,7 @@ namespace Logic
     {
         public bool IsWalkable => true;
         public float? TimeSinceBurnStart {get; set;}
-        public float BurnTime(LevelSettings settings) => settings.GroudBurnTime;
+        public float BurnTime(LevelSettings settings) => settings.GroundBurnTime;
     }
 
     public struct Weed: BurnableTile
@@ -70,7 +70,7 @@ namespace Logic
     {
         [Header("Objects Settings")]
         public float WeedBurnTime;
-        public float GroudBurnTime;
+        public float GroundBurnTime;
         public float WeedPickupTime;
         public float WeedCatchFireTime;
         public int FlamethrowerRange;
