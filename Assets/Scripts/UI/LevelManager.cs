@@ -124,7 +124,16 @@ namespace UI
                     var prevTile = previousLevelState.grid.tiles[i, j];
                     var currTile = LevelState.grid.tiles[i, j];
 
-                    throw new NotImplementedException();
+                    if (prevTile is Logic.BurnableTile prevBurnableTile &&
+                        currTile is Logic.BurnableTile currBurnableTile &&
+                        grid[i, j] is BurnableTile burnableGameTile)
+                    {
+                        if (LevelLogicManager.IsTileBurning(prevBurnableTile) !=
+                            LevelLogicManager.IsTileBurning(currBurnableTile))
+                        {
+                            burnableGameTile.Burn(LevelLogicManager.IsTileBurning(currBurnableTile));
+                        }
+                    }
                 }
             }
         }

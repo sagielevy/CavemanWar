@@ -4,8 +4,8 @@ using System;
 
 namespace UI
 {
-	public class GroundFire : MonoBehaviour
-	{
+	public class GroundFire : MonoBehaviour, BurnableTile
+    {
         [SerializeField] private Animator fireAnimator;
 
         public void Burn(bool isBurning)

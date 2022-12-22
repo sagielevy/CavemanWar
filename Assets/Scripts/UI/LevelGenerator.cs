@@ -26,7 +26,7 @@ namespace UI
 
             var width = levelState.grid.tiles.GetLength(0);
             var height = levelState.grid.tiles.GetLength(1);
-            Transform[,] grid = new Transform[width, height];
+            var grid = new Transform[width, height];
 
             for (int i = 0; i < width; i++)
             {

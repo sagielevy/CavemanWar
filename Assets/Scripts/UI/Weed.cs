@@ -4,8 +4,8 @@ using System;
 
 namespace UI
 {
-	public class Weed : MonoBehaviour
-	{
+	public class Weed : MonoBehaviour, BurnableTile
+    {
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator fireAnimator;
 
