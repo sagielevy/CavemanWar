@@ -140,7 +140,8 @@ namespace UI
                         }
                         else if (prevTile is Logic.Ground && currTile is Logic.Weed)
                         {
-                            grid[i, j] = LevelObjectsGenerator.MakeWeed(new Vector2Int(i, j), transform);
+                            grid[i, j] = LevelObjectsGenerator.MakeWeed(new Vector2Int(i, j),
+                                transform, LevelSettings);
                         }
                     }
                 }

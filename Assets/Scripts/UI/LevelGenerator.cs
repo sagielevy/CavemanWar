@@ -38,10 +38,10 @@ namespace UI
                     switch (tile)
                     {
                         case Logic.Weed:
-                            grid[i, j] = MakeWeed(index, parent);
+                            grid[i, j] = MakeWeed(index, parent, settings);
                             break;
                         case Logic.Rock:
-                            grid[i, j] = MakeRock(index, parent);
+                            grid[i, j] = MakeRock(index, parent, settings);
                             break;
                         default:
                             break;
@@ -52,7 +52,8 @@ namespace UI
             return new(player1, player2, grid);
         }
 
-        public Transform MakeRock(Vector2Int index, Transform parent)
+        public Transform MakeRock(Vector2Int index, Transform parent,
+            LevelSettings settings)
         {
             var rand = UnityEngine.Random.Range(0, 1);
             Transform rockPrefab;
@@ -72,7 +73,8 @@ namespace UI
                 Quaternion.identity, parent).transform;
         }
 
-        public Transform MakeWeed(Vector2Int index, Transform parent)
+        public Transform MakeWeed(Vector2Int index, Transform parent,
+            LevelSettings settings)
         {
             var position = new Vector3(index.x * UnitDistance,
                 index.y * UnitDistance);
