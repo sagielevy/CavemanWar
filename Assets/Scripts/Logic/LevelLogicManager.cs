@@ -35,15 +35,27 @@ namespace Logic
             }
             return playerState;
         }
-
-        private (Player, Grid) TryWeedPickup(Player player, Grid grid)
+        
+        private Player TryWeedPickup(Player player, Grid grid)
         {
             throw new NotImplementedException();
         }
 
-        private void Attack(Grid grid, Vector2Int playerPos, Direction direction, int range)
+        private void UpdateGrid(Grid grid)
         {
-            Vector2Int currIndex = playerPos + direction.Vector();
+            throw new NotImplementedException();
+        }
+
+        private Player HandleAttackInput(PlayerInput input, Player playerState, Grid grid)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        private Player Attack(Grid grid, Player player, Direction direction, int range)
+        {
+            player.TimeSinceLastAttack = 0;
+            Vector2Int currIndex = player.position + direction.Vector();
             Tile currTile;
             for (int i = 0; i < range; i++)
             {
@@ -51,7 +63,7 @@ namespace Logic
                 switch (currTile)
                 {
                     case Rock:
-                        return;
+                        return player;
                     case BurnableTile:
                         grid.tiles[currIndex.x, currIndex.y] = BurnTile((BurnableTile) currTile);
                         break;
@@ -60,12 +72,15 @@ namespace Logic
                 }
                 currIndex += direction.Vector();
             }
+            return player;
         }
 
-        public float PickupProgression(Player player, Grid grid)
+        // returns a float between 0 to 1, if player is not even on weed - return 0
+        public float WeedPickupProgression(Player player, Grid grid)
         {
-            // return float between 0 to 1, maybe use Math.lerp
-            throw new NotImplementedException();   // TODO
+            if (!IsPlayerOnWeed(player, grid)) return 0;
+            // if (player.TimeSinceLastMove / settings.WeedPickupTime;
+            throw new NotImplementedException();
         }
 
         public bool IsPlayerMoving(Player player)
@@ -117,6 +132,7 @@ namespace Logic
         private Player MovePlayer(Player player, Direction direction)
         {
             player.position += direction.Vector();
+            player.TimeSinceLastMove = 0;
             return player;
         }
 

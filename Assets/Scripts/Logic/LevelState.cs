@@ -58,28 +58,33 @@ namespace Logic
 
     public struct Ground : BurnableTile
     {
+        public float? TimeSinceBurnStart {get; set;}
+        
         public Ground(float? timeSinceBurnStart)
         {
             TimeSinceBurnStart = timeSinceBurnStart;
         }
 
         public bool IsWalkable => true;
-        public float? TimeSinceBurnStart {get; set;}
         public float BurnTime(LevelSettings settings) => settings.GroundBurnTime;
         public Tile Clone() => new Ground(this.TimeSinceBurnStart);
     }
 
     public struct Weed: BurnableTile
     {
+        public float? TimeSinceBurnStart {get; set;}
+        public float TimeSinceSpawn;
+
         public Weed(float? timeSinceBurnStart)
         {
             TimeSinceBurnStart = timeSinceBurnStart;
+            TimeSinceSpawn = 0;
         }
 
         public bool IsWalkable => true;
-        public float? TimeSinceBurnStart {get; set;}
         public float BurnTime(LevelSettings settings) => settings.WeedBurnTime;
         public Tile Clone() => new Weed(this.TimeSinceBurnStart);
+        
     }
 
     [Serializable]
