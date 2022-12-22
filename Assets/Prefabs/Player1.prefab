@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: -2545527960574149100}
+  playerSprite: {fileID: 617707157542835366}
   SFXmanager: {fileID: 0}
-  flamethrowerAnimator: {fileID: 0}
+  flamethrowerAnimator: {fileID: 818817655897301267}
   stepSfxTimerMax: 0.5
   hearts: []
 --- !u!95 &-2545527960574149100
