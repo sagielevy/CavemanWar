@@ -16,10 +16,6 @@ namespace Logic
             PlayerInput player2Input, LevelState currLevelState, 
             float deltaTime)
         {
-            /* iterate over Grid, for each cell perform these actions:
-            1. add deltaTime to each
-            */
-
             throw new NotImplementedException();
         }
 
