@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Logic {
-
+namespace Logic 
+{
     public enum Direction
     {
         Up,
@@ -56,6 +56,7 @@ namespace Logic {
         public float WeedBurnTime;
         public float GroudBurnTime;
         public float WeedPickupTime;
+        public float WeedCatchFireTime;
         public int FlamethrowerRange;
         public float InvincibiltyFramesTime;
         public float AttackCooldown;

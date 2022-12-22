@@ -1,6 +1,8 @@
 using System;
+using UnityEngine;
 
-namespace Logic {
+namespace Logic 
+{
     public struct LevelLogicManager
     {
         private LevelSettings levelSettings;
@@ -11,8 +13,13 @@ namespace Logic {
         }
 
         public LevelState UpdateLevel(PlayerInput player1Input,
-            PlayerInput player2Input, LevelState currLevelState, float deltaTime)
+            PlayerInput player2Input, LevelState currLevelState, 
+            float deltaTime)
         {
+            /* iterate over Grid, for each cell perform these actions:
+            1. add deltaTime to each
+            */
+
             throw new NotImplementedException();
         }
 
@@ -21,7 +28,12 @@ namespace Logic {
             throw new NotImplementedException();
         }
 
-        public bool IsTileBurning(Tile tileState) 
+        public bool IsTileBurning(Vector2Int tileIndex) 
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsGameOver(LevelState levelState)
         {
             throw new NotImplementedException();
         }

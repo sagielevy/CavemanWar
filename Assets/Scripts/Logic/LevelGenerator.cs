@@ -7,7 +7,7 @@ namespace Logic {
 		/// Makes new grid with all static tiles and some weeds.
 		/// </summary>
 		/// <returns></returns>
-		public Grid InitialState()
+		public Grid InitialState(LevelSettings settings)
 		{
 			throw new NotImplementedException();
 		}
