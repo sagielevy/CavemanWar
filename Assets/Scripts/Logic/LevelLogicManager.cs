@@ -18,13 +18,14 @@ namespace Logic
         {
             currLevelState.player1 = HandleMovementInput(player1Input, currLevelState.player1, currLevelState.grid);
             currLevelState.player2 = HandleMovementInput(player2Input, currLevelState.player2, currLevelState.grid);
-
+    
             return currLevelState;
         }
 
         private Player HandleMovementInput(PlayerInput input, Player playerState, Grid grid)
         {
-            if (input.moveDirection is not Direction moveDirection || IsPlayerMoving(playerState)) {
+            if (input.moveDirection is not Direction moveDirection || IsPlayerMoving(playerState) || 
+                IsPlayerFrozenAfterAttack(playerState)) {
                 return playerState;
             }
             Vector2Int nextTilePos = playerState.position + moveDirection.Vector();
@@ -33,6 +34,11 @@ namespace Logic
                 return MovePlayer(playerState, moveDirection);
             }
             return playerState;
+        }
+
+        private (Player, Grid) TryWeedPickup(Player player, Grid grid)
+        {
+            throw new NotImplementedException();
         }
 
         private void Attack(Grid grid, Vector2Int playerPos, Direction direction, int range)
@@ -56,7 +62,7 @@ namespace Logic
             }
         }
 
-        public float PickupProgression(Player player)
+        public float PickupProgression(Player player, Grid grid)
         {
             // return float between 0 to 1, maybe use Math.lerp
             throw new NotImplementedException();   // TODO
@@ -82,6 +88,11 @@ namespace Logic
             return levelState.player1.HP == 0 || levelState.player2.HP == 0;
         }
 
+        private bool IsPlayerOnWeed(Player player, Grid grid)
+        {
+            return grid.tiles[player.position.x, player.position.y] is Weed;
+        }
+
         private bool CanAttack(Player player)
         {
             return player.Ammo > 0 && !IsPlayerOnCooldown(player);
@@ -90,6 +101,11 @@ namespace Logic
         private bool IsPlayerOnCooldown(Player player) 
         {
             return player.TimeSinceLastAttack < settings.AttackCooldown;
+        }
+
+        private bool IsPlayerFrozenAfterAttack(Player player)
+        {
+            return player.TimeSinceLastAttack <= settings.PlayerAttackTime;
         }
         
         private BurnableTile BurnTile(BurnableTile tile)
