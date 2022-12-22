@@ -17,7 +17,8 @@ namespace UI
             throw new System.Exception();
         }
 
-        public void SpwanNewWeeds(LevelSettings LevelSettings)
+        public void SpwanNewWeeds(LevelState levelState,
+            LevelSettings LevelSettings)
         {
             throw new System.Exception();
         }
