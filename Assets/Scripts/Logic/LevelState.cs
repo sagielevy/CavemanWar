@@ -38,6 +38,7 @@ namespace Logic
     public interface Tile
     {
         bool IsWalkable { get; }
+        // Tile Clone(); //TODO
     }
 
     public interface BurnableTile : Tile

@@ -19,6 +19,14 @@ namespace Logic
             throw new NotImplementedException();   // TODO
         }
 
+        private void HandleMovementInput(PlayerInput input, Player playerState)
+        {
+            if (input.moveDirection.HasValue)
+            {
+                // playerState. COPY STATE AND RETURN NEW (IN ANOTHER FUNC)
+            }
+        }
+
         private void Attack(Grid grid, Vector2Int playerPos, Direction direction, int range)
         {
             Vector2Int currIndex = playerPos + direction.Vector();
@@ -31,7 +39,7 @@ namespace Logic
                     case Rock:
                         return;
                     case BurnableTile:
-                        BurnTile((BurnableTile) currTile);
+                        // grid[i,j] = BurnTile((BurnableTile) currTile);
                         break;
                     default:
                         break;
@@ -49,6 +57,11 @@ namespace Logic
         public bool IsPlayerMoving(Player player)
         {
             return !player.TimeSinceLastMove.HasValue || player.TimeSinceLastMove < settings.PlayerTileMoveTime;
+        }
+
+        public bool IsPlayerInvincible(Player player)
+        {
+            throw new NotImplementedException(); // TODO
         }
 
         public bool IsTileBurning(BurnableTile tile)
@@ -71,9 +84,10 @@ namespace Logic
             return player.TimeSinceLastAttack < settings.AttackCooldown;
         }
         
-        private void BurnTile(BurnableTile tile)
+        private BurnableTile BurnTile(BurnableTile tile)
         {
             tile.TimeSinceBurnStart = 0;
+            throw new NotImplementedException(); // TODO
         }
     }
 }
