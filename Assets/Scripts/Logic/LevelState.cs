@@ -23,7 +23,7 @@ namespace Logic
         public Vector2Int position;
         public Direction orientation;
 
-        public Player(int hp, float? timeSinceLastHit, Vector2Int position, Direction orientation)
+        public Player(int hp, Vector2Int position, Direction orientation)
         {
             HP = hp;
             Ammo = 0;
