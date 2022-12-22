@@ -7,15 +7,14 @@ namespace UI
 {
 	public class LevelGenerator : MonoBehaviour
 	{
-        [SerializeField] private float UnitDistance = 1;
 		[SerializeField] private Weed WeedPrefab;
         [SerializeField] private Transform Rock1Prefab;
         [SerializeField] private Transform Rock2Prefab;
         [SerializeField] private PlayerController Player1Prefab;
         [SerializeField] private PlayerController Player2Prefab;
 
-        public Tuple<PlayerController, PlayerController, Transform[,]> GenerateInitialLevel(Transform parent,
-            LevelState levelState, LevelSettings settings)
+        public Tuple<PlayerController, PlayerController, Transform[,]> GenerateInitialLevel(
+            Transform parent, LevelState levelState, LevelSettings settings)
         {
             var player1Position = new Vector3(levelState.player1.position.x,
                 levelState.player1.position.y);
@@ -57,8 +56,10 @@ namespace UI
         {
             var rand = UnityEngine.Random.Range(0, 1);
             Transform rockPrefab;
-            var position = new Vector3(index.x * UnitDistance,
-                index.y * UnitDistance);
+
+            var boardCenter = BoardCenter(settings);
+            var position = new Vector3(index.x - boardCenter.x,
+                index.y - boardCenter.y);
 
             if (rand < 0.5f)
             {
@@ -76,11 +77,18 @@ namespace UI
         public Transform MakeWeed(Vector2Int index, Transform parent,
             LevelSettings settings)
         {
-            var position = new Vector3(index.x * UnitDistance,
-                index.y * UnitDistance);
+            var boardCenter = BoardCenter(settings);
+            var position = new Vector3(index.x - boardCenter.x,
+                index.y - boardCenter.y);
 
             return Instantiate(WeedPrefab, position,
                 Quaternion.identity, parent).transform;
+        }
+
+        private Vector2 BoardCenter(LevelSettings settings)
+        {
+            return new Vector2(settings.GridWidth / 2.0f,
+                settings.GridHeight / 2.0f);
         }
     }
 }

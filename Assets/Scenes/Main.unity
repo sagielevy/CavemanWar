@@ -182,10 +182,10 @@ MonoBehaviour:
     InitialPlayer2Pos: {x: 13, y: 7}
     WeedInitialSpawnTime: 0.1
     WeedSpawnSpeedCurvePercent: 0.01
-    InitialRocks: 15
+    InitialRocks: 30
     InitialWeeds: 10
-    GridWidth: 14
-    GridHeight: 8
+    GridWidth: 18
+    GridHeight: 10
 --- !u!1 &1396767843
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca848bd5983f412ebe74bf215cc83a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDistance: 1
   WeedPrefab: {fileID: 5689169207849309636, guid: 37c74e6de7a4342b9a524633acd5edde, type: 3}
   Rock1Prefab: {fileID: 2038398096141788844, guid: 5ba8aac7568e04c29bd9dda809ab9ebe, type: 3}
   Rock2Prefab: {fileID: 2038398096141788844, guid: 62991225404b04727be4a194a9d0232a, type: 3}
