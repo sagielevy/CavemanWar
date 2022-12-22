@@ -97,5 +97,12 @@ namespace Logic
         public Grid grid;
         public Player player1;
         public Player player2;
+
+        public LevelState(Grid grid, Player player1, Player player2)
+        {
+            this.grid = grid;
+            this.player1 = player1;
+            this.player2 = player2;
+        }
     }
 }
