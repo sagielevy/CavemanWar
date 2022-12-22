@@ -27,6 +27,7 @@ namespace UI
 
         public void Start()
         {
+            SFXmanager = GameObject.FindWithTag("SFX").GetComponent<SFXmanager>();
             playerSprite = GetComponent<SpriteRenderer>();
             playerAnimator = GetComponent<Animator>();
         }
