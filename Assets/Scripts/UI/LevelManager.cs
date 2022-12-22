@@ -7,6 +7,7 @@ namespace UI
 {
     public class LevelManager : MonoBehaviour
     {
+        [SerializeField] private GroundFire GroundPrefab;
         [SerializeField] private LevelSettings LevelSettings;
 
         private LevelGenerator LevelTilesGenerator;
@@ -29,12 +30,12 @@ namespace UI
         {
             var player1Input = GetPlayer1Input();
             var player2Input = GetPlayer2Input();
+            var previousLevelState = LevelState;
 
             LevelState = LevelLogicManager.UpdateLevel(player1Input, player2Input,
-                LevelState, Time.deltaTime);
-            LevelTilesGenerator.SpwanNewWeeds(LevelState, LevelSettings);
+                previousLevelState, Time.deltaTime);
 
-            //LevelLogicManager.UpdateLevel()
+            UpdateLevelObjects(previousLevelState);
         }
 
         private PlayerInput GetPlayer1Input()
@@ -43,6 +44,11 @@ namespace UI
         }
 
         private PlayerInput GetPlayer2Input()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateLevelObjects(LevelState previousLevelState)
         {
             throw new NotImplementedException();
         }

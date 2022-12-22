@@ -4,9 +4,8 @@ using System;
 
 namespace UI
 {
-	public class Weed : MonoBehaviour
+	public class GroundFire : MonoBehaviour
 	{
-        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator fireAnimator;
 
         public void Burn(bool isBurning)
