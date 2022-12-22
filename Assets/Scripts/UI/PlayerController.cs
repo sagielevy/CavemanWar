@@ -83,8 +83,14 @@ namespace UI
                 for(var i=levelSettings.InitialHP; i > currentPlayerState.HP; i--)
                 {
                     hearts[i].enabled = false;
-                }
-                
+                } 
+            }
+
+            //shoot
+            if(currentPlayerState.TimeSinceLastAttack < previousPlayerState.TimeSinceLastAttack)
+            {
+                SFXmanager.playShoot();
+                flamethrowerAnimator.SetTrigger("Burn");
             }
 
         }
