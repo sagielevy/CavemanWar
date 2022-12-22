@@ -18,13 +18,39 @@ namespace Logic {
 
 		private Grid InitialGridState(LevelSettings settings)
 		{
-            throw new NotImplementedException();
-        }
+			var grid = new Grid(settings.GridWidth, settings.GridHeight);
+			GenerateRocksInGrid(grid, settings);
+			GenerateWeedsInGrid(grid, settings);
+			return grid;
+		}
 
-		private Vector2Int GenerateRandomPosInGrid(Grid grid)
+		private void GenerateRocksInGrid(Grid grid, LevelSettings settings)
 		{
-			// return new Vector2Int(UnityEngine.Random.RandomRange(0, grid.))
-            throw new NotImplementedException();
+			for (int i = 0; i <= settings.InitialRocks; i++)
+			{
+				Vector2Int pos = GenerateRandomPosInGrid(settings.GridWidth, settings.GridHeight);
+				if (pos != settings.InitialPlayer1Pos && pos != settings.InitialPlayer2Pos)
+				{
+					grid.tiles[pos.x, pos.y] = new Rock();
+				}
+			}
+		}
+
+		private void GenerateWeedsInGrid(Grid grid, LevelSettings settings)
+		{
+			for (int i = 0; i <= settings.InitialWeeds; i++)
+			{
+				Vector2Int pos = GenerateRandomPosInGrid(settings.GridWidth, settings.GridHeight);
+				if (pos != settings.InitialPlayer1Pos && pos != settings.InitialPlayer2Pos)
+				{
+					grid.tiles[pos.x, pos.y] = new Weed();
+				}
+			}
+		}
+
+		private Vector2Int GenerateRandomPosInGrid(int width, int height)
+		{
+			return new Vector2Int(UnityEngine.Random.Range(0, width), UnityEngine.Random.Range(0, height));
 		}
 
         private Player InitialPlayer1State(LevelSettings settings)
