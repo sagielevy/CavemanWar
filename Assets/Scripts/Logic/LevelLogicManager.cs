@@ -1,18 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public struct LevelLogicManager
-{
-    public LevelState UpdateLevel(PlayerInput player1Input,
-        PlayerInput player2Input, LevelState levelState)
+namespace Logic {
+    public struct LevelLogicManager
     {
-        throw new NotImplementedException();
-    }
+        private LevelSettings levelSettings;
 
-    public bool IsPlayerMoving(Player playerState)
-    {
-        throw new NotImplementedException();
+        public LevelLogicManager(LevelSettings levelSettings)
+        {
+            this.levelSettings = levelSettings;
+        }
+
+        public LevelState UpdateLevel(PlayerInput player1Input,
+            PlayerInput player2Input, LevelState currLevelState, float deltaTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsPlayerMoving(Player playerState)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsTileBurning(Tile tileState) 
+        {
+            throw new NotImplementedException();
+        }
     }
 }

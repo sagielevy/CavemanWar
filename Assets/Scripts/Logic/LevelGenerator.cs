@@ -1,26 +1,27 @@
 ﻿using System;
 
-public struct LevelGenerator
-{
-	/// <summary>
-	/// Makes new grid with all static tiles and some weeds.
-	/// </summary>
-	/// <returns></returns>
-	public Grid InitialState()
+namespace Logic {
+	public struct LevelGenerator
 	{
-		throw new NotImplementedException();
+		/// <summary>
+		/// Makes new grid with all static tiles and some weeds.
+		/// </summary>
+		/// <returns></returns>
+		public Grid InitialState()
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Generate new weeds.
+		/// </summary>
+		/// <param name="previousState"></param>
+		/// <param name="deltaTime"></param>
+		/// <returns></returns>
+		public Grid SpawnNewWeeds(Grid previousState, LevelSettings settings,
+			float deltaTime)
+		{
+			throw new NotImplementedException();
+		}
 	}
-
-	/// <summary>
-	/// Generate new weeds.
-	/// </summary>
-	/// <param name="previousState"></param>
-	/// <param name="deltaTime"></param>
-	/// <returns></returns>
-	public Grid SpawnNewWeeds(Grid previousState, LevelSettings settings,
-		float deltaTime)
-	{
-        throw new NotImplementedException();
-    }
 }
-
