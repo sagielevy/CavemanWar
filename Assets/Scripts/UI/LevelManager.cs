@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Logic;
+using System;
 
 namespace UI
 {
@@ -26,10 +27,24 @@ namespace UI
 
         private void Update()
         {
-            //var player1Input =
+            var player1Input = GetPlayer1Input();
+            var player2Input = GetPlayer2Input();
 
-            LevelTilesGenerator.SpwanNewWeeds(LevelSettings);
+            LevelState = LevelLogicManager.UpdateLevel(player1Input, player2Input,
+                LevelState, Time.deltaTime);
+            LevelTilesGenerator.SpwanNewWeeds(LevelState, LevelSettings);
+
             //LevelLogicManager.UpdateLevel()
+        }
+
+        private PlayerInput GetPlayer1Input()
+        {
+            throw new NotImplementedException();
+        }
+
+        private PlayerInput GetPlayer2Input()
+        {
+            throw new NotImplementedException();
         }
     }
 }
