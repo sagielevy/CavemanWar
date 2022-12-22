@@ -113,9 +113,9 @@ namespace UI
         private void UpdateLevelObjects(LevelState previousLevelState)
         {
             player1.UpdatePlayer(LevelState.player1, previousLevelState.player1,
-                LevelSettings);
+                LevelSettings, LevelLogicManager);
             player2.UpdatePlayer(LevelState.player2, previousLevelState.player2,
-                LevelSettings);
+                LevelSettings, LevelLogicManager);
 
             for (int i = 0; i < LevelState.grid.tiles.GetLength(0); i++)
             {
@@ -132,6 +132,15 @@ namespace UI
                             LevelLogicManager.IsTileBurning(currBurnableTile))
                         {
                             burnableGameTile.Burn(LevelLogicManager.IsTileBurning(currBurnableTile));
+                        }
+
+                        if (prevTile is Logic.Weed && currTile is Logic.Ground)
+                        {
+                            Destroy(grid[i, j].gameObject);
+                        }
+                        else if (prevTile is Logic.Ground && currTile is Logic.Weed)
+                        {
+                            grid[i, j] = LevelObjectsGenerator.MakeWeed(new Vector2Int(i, j), transform);
                         }
                     }
                 }

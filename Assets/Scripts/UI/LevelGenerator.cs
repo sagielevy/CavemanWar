@@ -33,35 +33,52 @@ namespace UI
                 for (int j = 0; j < height; j++)
                 {
                     var tile = levelState.grid.tiles[i, j];
-                    var position = new Vector3(i * UnitDistance, j * UnitDistance);
+                    var index = new Vector2Int(i, j);
 
                     switch (tile)
                     {
                         case Logic.Weed:
-                            grid[i, j] = Instantiate(WeedPrefab, position,
-                                Quaternion.identity, parent).transform;
+                            grid[i, j] = MakeWeed(index, parent);
                             break;
                         case Logic.Rock:
-                            var rand = UnityEngine.Random.Range(0, 1);
-                            Transform rockPrefab;
-
-                            if (rand < 0.5f)
-                            {
-                                rockPrefab = Rock1Prefab;
-                            }
-                            else
-                            {
-                                rockPrefab = Rock2Prefab;
-                            }
-
-                            grid[i, j] = Instantiate(rockPrefab, position,
-                                Quaternion.identity, parent).transform;
+                            grid[i, j] = MakeRock(index, parent);
+                            break;
+                        default:
                             break;
                     }
                 }
             }
 
             return new(player1, player2, grid);
+        }
+
+        public Transform MakeRock(Vector2Int index, Transform parent)
+        {
+            var rand = UnityEngine.Random.Range(0, 1);
+            Transform rockPrefab;
+            var position = new Vector3(index.x * UnitDistance,
+                index.y * UnitDistance);
+
+            if (rand < 0.5f)
+            {
+                rockPrefab = Rock1Prefab;
+            }
+            else
+            {
+                rockPrefab = Rock2Prefab;
+            }
+
+            return Instantiate(rockPrefab, position,
+                Quaternion.identity, parent).transform;
+        }
+
+        public Transform MakeWeed(Vector2Int index, Transform parent)
+        {
+            var position = new Vector3(index.x * UnitDistance,
+                index.y * UnitDistance);
+
+            return Instantiate(WeedPrefab, position,
+                Quaternion.identity, parent).transform;
         }
     }
 }
