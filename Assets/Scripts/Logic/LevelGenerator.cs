@@ -3,6 +3,8 @@
 namespace Logic {
 	public struct LevelGenerator
 	{
+		private const int InitialHP = 3;
+
 		/// <summary>
 		/// Makes new grid with all static tiles and some weeds.
 		/// </summary>

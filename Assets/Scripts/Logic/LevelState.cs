@@ -22,6 +22,17 @@ namespace Logic
         public float? TimeSinceLastMove;
         public Vector2Int position;
         public Direction orientation;
+
+        public Player(int hp, float? timeSinceLastHit, Vector2Int position, Direction orientation)
+        {
+            HP = hp;
+            Ammo = 0;
+            TimeSinceLastHit = null;
+            TimeSinceLastAttack = null;
+            TimeSinceLastMove = null;
+            this.position = position;
+            this.orientation = orientation;
+        }
     }
 
     public interface Tile
@@ -29,23 +40,29 @@ namespace Logic
         bool IsWalkable { get; }
     }
 
+    public interface BurnableTile : Tile
+    {
+        float? TimeSinceBurnStart {get; set;}
+        float BurnTime(LevelSettings settings);
+    }
+
     public struct Rock : Tile
     {
         public bool IsWalkable => false;
     }
 
-    public struct Ground : Tile
+    public struct Ground : BurnableTile
     {
-        public float? TimeSinceBurnStart;
-
         public bool IsWalkable => true;
+        public float? TimeSinceBurnStart {get; set;}
+        public float BurnTime(LevelSettings settings) => settings.GroudBurnTime;
     }
 
-    public struct Weed: Tile
+    public struct Weed: BurnableTile
     {
-        public float? TimeSinceBurnStart;
-
         public bool IsWalkable => true;
+        public float? TimeSinceBurnStart {get; set;}
+        public float BurnTime(LevelSettings settings) => settings.WeedBurnTime;
     }
 
     [Serializable]
@@ -89,6 +106,11 @@ namespace Logic
                     tiles[i, j] = new Ground();
                 }
             }
+        }
+
+        public Tile GetTileByVectorIndex(Vector2Int index)
+        {
+            return this.tiles[index.x, index.y];
         }
     }
 
