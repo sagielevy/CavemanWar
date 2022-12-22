@@ -16,19 +16,23 @@ namespace Logic
             PlayerInput player2Input, LevelState currLevelState, 
             float deltaTime)
         {
-            throw new NotImplementedException();   // TODO
+            currLevelState.player1 = HandleMovementInput(player1Input, currLevelState.player1, currLevelState.grid);
+            currLevelState.player2 = HandleMovementInput(player2Input, currLevelState.player2, currLevelState.grid);
+
+            return currLevelState;
         }
 
-        private void HandleMovementInput(PlayerInput input, Player playerState, Grid grid)
+        private Player HandleMovementInput(PlayerInput input, Player playerState, Grid grid)
         {
             if (input.moveDirection is not Direction moveDirection || IsPlayerMoving(playerState)) {
-                return;
+                return playerState;
             }
             Vector2Int nextTilePos = playerState.position + moveDirection.Vector();
             if (CanPlayerWalkThere(nextTilePos, grid))
             {
-                playerState = MovePlayer(playerState, moveDirection);
+                return MovePlayer(playerState, moveDirection);
             }
+            return playerState;
         }
 
         private void Attack(Grid grid, Vector2Int playerPos, Direction direction, int range)
