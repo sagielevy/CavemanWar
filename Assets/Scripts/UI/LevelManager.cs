@@ -40,12 +40,66 @@ namespace UI
 
         private PlayerInput GetPlayer1Input()
         {
-            throw new NotImplementedException();
+            // WASD & Space
+            var tryAttacking = false;
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                tryAttacking = true;
+            }
+
+            Direction? moveDirection = null;
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveDirection = Direction.Up;
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                moveDirection = Direction.Left;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                moveDirection = Direction.Down;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                moveDirection = Direction.Right;
+            }
+
+            return new PlayerInput(moveDirection, tryAttacking);
         }
 
         private PlayerInput GetPlayer2Input()
         {
-            throw new NotImplementedException();
+            // Arrows and Enter
+            var tryAttacking = false;
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                tryAttacking = true;
+            }
+
+            Direction? moveDirection = null;
+
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                moveDirection = Direction.Up;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                moveDirection = Direction.Left;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                moveDirection = Direction.Down;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                moveDirection = Direction.Right;
+            }
+
+            return new PlayerInput(moveDirection, tryAttacking);
         }
 
         private void UpdateLevelObjects(LevelState previousLevelState)

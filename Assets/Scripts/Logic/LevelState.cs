@@ -82,8 +82,14 @@ namespace Logic
 
     public struct PlayerInput
     {
-        public Direction moveDirection;
-        public bool didAttack;
+        public Direction? moveDirection;
+        public bool didTryAttack;
+
+        public PlayerInput(Direction? moveDirection, bool didTryAttack)
+        {
+            this.moveDirection = moveDirection;
+            this.didTryAttack = didTryAttack;
+        }
     }
 
     public struct Grid
