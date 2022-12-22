@@ -70,17 +70,17 @@ namespace Logic
 
         public bool IsPlayerMoving(Player player)
         {
-            return !player.TimeSinceLastMove.HasValue || player.TimeSinceLastMove < settings.PlayerTileMoveTime;
+            return player.TimeSinceLastMove < settings.PlayerTileMoveTime;
         }
 
         public bool IsPlayerInvincible(Player player)
         {
-            throw new NotImplementedException(); // TODO
+            return player.TimeSinceLastAttack < settings.InvincibiltyFramesTime;
         }
 
         public bool IsTileBurning(BurnableTile tile)
         {
-            return !tile.TimeSinceBurnStart.HasValue || tile.TimeSinceBurnStart <= tile.BurnTime(settings);
+            return tile.TimeSinceBurnStart <= tile.BurnTime(settings);
         }
 
         public bool IsGameOver(LevelState levelState)
