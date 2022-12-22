@@ -19,11 +19,15 @@ namespace Logic
             throw new NotImplementedException();   // TODO
         }
 
-        private void HandleMovementInput(PlayerInput input, Player playerState)
+        private void HandleMovementInput(PlayerInput input, Player playerState, Grid grid)
         {
-            if (input.moveDirection.HasValue)
+            if (input.moveDirection is not Direction moveDirection || IsPlayerMoving(playerState)) {
+                return;
+            }
+            Vector2Int nextTilePos = playerState.position + moveDirection.Vector();
+            if (CanPlayerWalkThere(nextTilePos, grid))
             {
-                // playerState. COPY STATE AND RETURN NEW (IN ANOTHER FUNC)
+                playerState = MovePlayer(playerState, moveDirection);
             }
         }
 
@@ -39,7 +43,7 @@ namespace Logic
                     case Rock:
                         return;
                     case BurnableTile:
-                        // grid[i,j] = BurnTile((BurnableTile) currTile);
+                        grid.tiles[currIndex.x, currIndex.y] = BurnTile((BurnableTile) currTile);
                         break;
                     default:
                         break;
@@ -87,7 +91,23 @@ namespace Logic
         private BurnableTile BurnTile(BurnableTile tile)
         {
             tile.TimeSinceBurnStart = 0;
-            throw new NotImplementedException(); // TODO
+            return tile;
+        }
+
+        private Player MovePlayer(Player player, Direction direction)
+        {
+            player.position += direction.Vector();
+            return player;
+        }
+
+        private bool CanPlayerWalkThere(Vector2Int dstPos, Grid grid)
+        {
+            if (dstPos.x >= settings.GridWidth || dstPos.x < 0 || dstPos.y >= settings.GridHeight || dstPos.y < 0)
+            {
+                return false;
+            }   
+            Tile nextTile = grid.tiles[dstPos.x, dstPos.y];
+            return nextTile.IsWalkable;
         }
     }
 }

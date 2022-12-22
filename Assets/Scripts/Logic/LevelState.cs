@@ -38,7 +38,7 @@ namespace Logic
     public interface Tile
     {
         bool IsWalkable { get; }
-        // Tile Clone(); //TODO
+        Tile Clone();
     }
 
     public interface BurnableTile : Tile
@@ -50,20 +50,36 @@ namespace Logic
     public struct Rock : Tile
     {
         public bool IsWalkable => false;
+        public Tile Clone()
+        {
+            return new Rock();
+        }
     }
 
     public struct Ground : BurnableTile
     {
+        public Ground(float? timeSinceBurnStart)
+        {
+            TimeSinceBurnStart = timeSinceBurnStart;
+        }
+
         public bool IsWalkable => true;
         public float? TimeSinceBurnStart {get; set;}
         public float BurnTime(LevelSettings settings) => settings.GroundBurnTime;
+        public Tile Clone() => new Ground(this.TimeSinceBurnStart);
     }
 
     public struct Weed: BurnableTile
     {
+        public Weed(float? timeSinceBurnStart)
+        {
+            TimeSinceBurnStart = timeSinceBurnStart;
+        }
+
         public bool IsWalkable => true;
         public float? TimeSinceBurnStart {get; set;}
         public float BurnTime(LevelSettings settings) => settings.WeedBurnTime;
+        public Tile Clone() => new Weed(this.TimeSinceBurnStart);
     }
 
     [Serializable]
