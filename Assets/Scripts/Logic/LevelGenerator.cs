@@ -26,7 +26,7 @@ namespace Logic {
 
 		private void GenerateRocksInGrid(Grid grid, LevelSettings settings)
 		{
-			for (int i = 0; i <= settings.InitialRocks; i++)
+			for (int i = 0; i < settings.InitialRocks; i++)
 			{
 				Vector2Int pos = GenerateRandomPosInGrid(grid, settings.GridWidth, settings.GridHeight);
 				if (pos != settings.InitialPlayer1Pos && pos != settings.InitialPlayer2Pos)
@@ -38,7 +38,7 @@ namespace Logic {
 
 		private void GenerateWeedsInGrid(Grid grid, LevelSettings settings)
 		{
-			for (int i = 0; i <= settings.InitialWeeds; i++)
+			for (int i = 0; i < settings.InitialWeeds; i++)
 			{
 				Vector2Int pos = GenerateRandomPosInGrid(grid, settings.GridWidth, settings.GridHeight);
 				if (pos != settings.InitialPlayer1Pos && pos != settings.InitialPlayer2Pos)

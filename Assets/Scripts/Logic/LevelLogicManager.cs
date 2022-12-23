@@ -94,7 +94,7 @@ namespace Logic
                     {
                         if (!IsTileBurning(burnable) && burnable.TimeSinceBurnStart.HasValue) 
                         {
-                            grid.tiles[i, j] = new Ground();
+                            grid.tiles[i, j] = new Ground(null);
                             currTile = grid.tiles[i, j];
                         }
                         else if (!burnable.TimeSinceBurnStart.HasValue && burnable is Weed weed && 
@@ -103,7 +103,7 @@ namespace Logic
                             weed.TimeSinceBurnStart = 0;
                             grid.tiles[i , j] = weed;
                             currTile = weed;
-                        } 
+                        }
                     }
 
                     switch(currTile)
@@ -128,9 +128,9 @@ namespace Logic
         {
             var maxTimeSinceBurn = float.MinValue;
 
-            for (int i = x - 1; i < x + 1; i++)
+            for (int i = x - 1; i <= x + 1; i++)
             {
-                for (int j = y - 1; j < y + 1; j++) 
+                for (int j = y - 1; j <= y + 1; j++)
                 {
                     if (i < 0 || i >= settings.GridWidth || j < 0 || j >= settings.GridHeight ||
                         grid.tiles[i, j] is not Weed weedTile) { continue; }

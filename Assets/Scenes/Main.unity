@@ -174,7 +174,7 @@ MonoBehaviour:
     WeedCatchFireTime: 0.2
     FlamethrowerRange: 3
     AttackCooldown: 0.15
-    InvincibiltyFramesTime: 0.25
+    InvincibiltyFramesTime: 1
     PlayerTileMoveTime: 0.25
     PlayerAttackTime: 0.15
     InitialHP: 3
