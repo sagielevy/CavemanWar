@@ -11,6 +11,7 @@ namespace UI
         [SerializeField] private Weed WeedPrefab;
         [SerializeField] private Transform Rock1Prefab;
         [SerializeField] private Transform Rock2Prefab;
+        [SerializeField] private Transform Rock3Prefab;
         [SerializeField] private PlayerController Player1Prefab;
         [SerializeField] private PlayerController Player2Prefab;
 
@@ -65,20 +66,24 @@ namespace UI
         public Transform MakeRock(Vector2Int index, Transform parent,
             LevelSettings settings)
         {
-            var rand = UnityEngine.Random.Range(0, 1);
+            var rand = UnityEngine.Random.Range(0.0f, 1.0f);
             Transform rockPrefab;
 
             var boardCenter = BoardCenter(settings);
             var position = new Vector3(index.x - boardCenter.x,
                 index.y - boardCenter.y);
 
-            if (rand < 0.5f)
+            if (rand < 0.33f)
             {
                 rockPrefab = Rock1Prefab;
             }
-            else
+            else if (rand < 0.66f)
             {
                 rockPrefab = Rock2Prefab;
+            }
+            else
+            {
+                rockPrefab = Rock3Prefab;
             }
 
             return Instantiate(rockPrefab, position,
