@@ -12,14 +12,49 @@ namespace Logic
             this.settings = levelSettings;
         }
 
-        public LevelState UpdateLevel(PlayerInput player1Input,
+        public LevelState UpdateLevel(LevelGenerator levelGenerator, PlayerInput player1Input,
             PlayerInput player2Input, LevelState currLevelState, 
             float deltaTime)
         {
-            currLevelState.player1 = HandleMovementInput(player1Input, currLevelState.player1, currLevelState.grid);
-            currLevelState.player2 = HandleMovementInput(player2Input, currLevelState.player2, currLevelState.grid);
-    
-            return currLevelState;
+            var grid = CloneGrid(currLevelState.grid);
+            var player1 = HandleMovementInput(player1Input, currLevelState.player1, grid);
+            var player2 = HandleMovementInput(player2Input, currLevelState.player2, grid);
+
+            player1 = HandleWeedPickup(player1, grid);
+            player2 = HandleWeedPickup(player2, grid);
+
+            UpdateGrid(grid, deltaTime);
+
+            player1 = HandleAttackInput(player1Input, player1, grid);
+            player2 = HandleAttackInput(player2Input, player2, grid);
+
+            player1 = HandlePlayerHit(player1, grid);
+            player2 = HandlePlayerHit(player2, grid);
+
+            player1 = UpdatePlayerCounters(player1, deltaTime);
+            player2 = UpdatePlayerCounters(player2, deltaTime);
+
+            var newLevelState = new LevelState(grid, player1, player2,
+                currLevelState.currentWeedSpawnRate, currLevelState.timeSinceLastSpawn);
+
+            return HandleWeedSpawn(newLevelState, levelGenerator);
+        }
+
+        private Grid CloneGrid(Grid origin)
+        {
+            var width = origin.tiles.GetLength(0);
+            var height = origin.tiles.GetLength(1);
+            var result = new Tile[width, height];
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    result[i, j] = origin.tiles[i, j];
+                }
+            }
+
+            return new(result);
         }
 
         private Player HandleMovementInput(PlayerInput input, Player playerState, Grid grid)
@@ -36,7 +71,7 @@ namespace Logic
             return playerState;
         }
         
-        private Player TryWeedPickup(Player player, Grid grid)
+        private Player HandleWeedPickup(Player player, Grid grid)
         {
             throw new NotImplementedException();
         }
@@ -48,7 +83,12 @@ namespace Logic
 
         private Player HandleAttackInput(PlayerInput input, Player playerState, Grid grid)
         {
-            throw new NotImplementedException();
+            if (input.didTryAttack && CanAttack(playerState))
+            {
+                return Attack(grid, playerState, settings.FlamethrowerRange);
+            }
+
+            return playerState;
         }
 
         private Player HandlePlayerHit(Player player, Grid grid)
@@ -56,8 +96,7 @@ namespace Logic
             throw new NotImplementedException();
         }
 
-        private void HandleWeedSpawn(Grid grid, float currentWeedSpawnRate, 
-            float timeSinceLastSpawn, LevelGenerator levelGenerator)
+        private LevelState HandleWeedSpawn(LevelState levelState, LevelGenerator levelGenerator)
         {
             throw new NotImplementedException();
         }
