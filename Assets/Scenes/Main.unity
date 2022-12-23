@@ -178,15 +178,15 @@ MonoBehaviour:
     PlayerTileMoveTime: 0.2
     PlayerAttackTime: 0.15
     InitialHP: 3
-    InitialPlayer1Pos: {x: 0, y: 7}
-    InitialPlayer2Pos: {x: 17, y: 7}
+    InitialPlayer1Pos: {x: 0, y: 4}
+    InitialPlayer2Pos: {x: 15, y: 4}
     WeedInitialSpawnTime: 5
     WeedMinimalSpawnTime: 0.3
     WeedSpawnSpeedCurvePercent: 0.08
     InitialRocks: 15
     InitialWeeds: 10
-    GridWidth: 18
-    GridHeight: 10
+    GridWidth: 16
+    GridHeight: 8
 --- !u!1001 &421542270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -461,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
       propertyPath: m_LocalRotation.w
