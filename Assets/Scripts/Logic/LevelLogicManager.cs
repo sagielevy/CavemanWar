@@ -168,7 +168,7 @@ namespace Logic
             float deltaTime)
         {
             var (hasSpawned, newGrid) = levelGenerator.SpawnNewWeeds(levelState, settings, deltaTime);
-            var currentWeedSpawnRate = Mathf.Min(levelState.currentWeedSpawnRate -
+            var currentWeedSpawnRate = Mathf.Max(levelState.currentWeedSpawnRate -
                 settings.WeedSpawnSpeedCurvePercent * deltaTime,
                 settings.WeedMinimalSpawnTime);
 

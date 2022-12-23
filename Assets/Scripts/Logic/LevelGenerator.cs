@@ -53,12 +53,15 @@ namespace Logic {
 			var index = new Vector2Int(UnityEngine.Random.Range(0, width),
 				UnityEngine.Random.Range(0, height));
 			var tileAtIndex = grid.tiles[index.x, index.y];
+			var count = 0;
 
-            while (tileAtIndex is Weed || tileAtIndex is Rock)
+            while (tileAtIndex is Weed || tileAtIndex is Rock && count < 100)
 			{
                 index = new Vector2Int(UnityEngine.Random.Range(0, width),
 					UnityEngine.Random.Range(0, height));
                 tileAtIndex = grid.tiles[index.x, index.y];
+
+				count++;
             }
 
 			return index;
