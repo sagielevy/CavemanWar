@@ -200,7 +200,7 @@ namespace Logic
             for (int i = 0; i < range; i++)
             {
                 currIndex += player.orientation.Vector();
-                if (currIndex.x < 0 || currIndex.x >= settings.GridWidth || currIndex.y < 0 | currIndex.y >= settings.GridHeight)
+                if (currIndex.x < 0 || currIndex.x >= settings.GridWidth || currIndex.y < 0 || currIndex.y >= settings.GridHeight)
                 {
                     return player;
                 }
