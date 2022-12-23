@@ -73,7 +73,12 @@ namespace Logic
         
         private Player HandleWeedPickup(Player player, Grid grid)
         {
-            throw new NotImplementedException();
+            if (WeedPickupProgression(player, grid) == 1)
+            {
+                player.Ammo += 1;
+                grid.tiles[player.position.x, player.position.y] = new Ground();
+            }
+            return player;
         }
 
         private void UpdateGrid(Grid grid, float deltaTime)
