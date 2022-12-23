@@ -90,12 +90,18 @@ namespace Logic
             return player;
         }
 
-        // returns a float between 0 to 1, if player is not even on weed - return 0
+        // returns a float between 0 to 1. if player is not even on weed - return 0. if can pick - return 1.
         public float WeedPickupProgression(Player player, Grid grid)
         {
-            // !IsPlayerOnWeed(player, grid)) return 0;
-            // if ( !player.TimeSinceLastMove.HasValue && )
-            throw new NotImplementedException();
+            Weed? tile = IsPlayerOnWeed(player, grid);
+            if (tile is not Weed weed) return 0;
+            if (!player.TimeSinceLastMove.HasValue)
+            {
+                return Mathf.Clamp01(weed.TimeSinceSpawn / settings.WeedPickupTime);
+            } else {
+                float shorterTime = Mathf.Min((float) player.TimeSinceLastMove, weed.TimeSinceSpawn);
+                return Mathf.Clamp01(shorterTime);
+            }
         }
 
         public bool IsPlayerMoving(Player player)
