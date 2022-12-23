@@ -129,7 +129,7 @@ namespace Logic
             {
                 for (int j = y - 1; j < y + 1; j++) 
                 {
-                    if (i < 0 || i >= settings.GridWidth || j < 0 ||j > settings.GridHeight ||
+                    if (i < 0 || i >= settings.GridWidth || j < 0 || j > settings.GridHeight ||
                         grid.tiles[i, j] is not Weed weedTile) { continue; }
                     
                     var neighbourTime = weedTile.TimeSinceBurnStart ?? float.MinValue;
@@ -244,7 +244,7 @@ namespace Logic
             return player.TimeSinceLastAttack < settings.InvincibiltyFramesTime;
         }
 
-        public bool IsTileBurning(BurnableTile tile)
+        public bool  IsTileBurning(BurnableTile tile)
         {
             return tile.TimeSinceBurnStart <= tile.BurnTime(settings);
         }
