@@ -521,6 +521,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5219206955360058117, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5219206955991646967, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
       propertyPath: m_Name
       value: Menus Canvas

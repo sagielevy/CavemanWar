@@ -20,15 +20,15 @@ public class UICanvas : MonoBehaviour
     void Start()
     {
         //find screenH
-        collider = GetComponent<BoxCollider2D>();
-        screenH = collider.size.y * 1f;
+        //collider = GetComponent<BoxCollider2D>();
+        //screenH = collider.size.y * 1f;
 
         //push the game over screen up
-        overDest = screenH * 1.5f;
-        gameOverTrans.position = new Vector3(0f,screenH * 1.5f,0f);
+        //overDest = screenH * 1.5f;
+        //gameOverTrans.position = new Vector3(0f,screenH * 1.5f,0f);
 
-        mainDest = screenH * 0.5f;
-        mainMenuTrans.position = new Vector3(0f,screenH * 0.5f, 0f);
+        //mainDest = screenH * 0.5f;
+        //mainMenuTrans.position = new Vector3(0f,screenH * 0.5f, 0f);
 
         
     }
@@ -36,19 +36,21 @@ public class UICanvas : MonoBehaviour
     //call this to push the main menu away
     public void startGame()
     {
-        mainDest = -screenH;
+        mainMenuTrans.gameObject.SetActive(false);
+        //mainDest = -screenH;
         isGameStarted = true;
     }
 
     public void endGame(int winningPlayerIndex)
     {
+        gameOverTrans.gameObject.SetActive(true);
         isGameOver = false;
 
         //update pos dests
         overDest = 0.5f * screenH;
 
         //update text
-        playerWon.text = "player " + winningPlayerIndex.ToString() + " won";
+        playerWon.text = "player " + (winningPlayerIndex+1).ToString() + " won";
     }
     
     // Update is called once per frame
@@ -59,12 +61,14 @@ public class UICanvas : MonoBehaviour
             startGame();
 
         //lerp canvases to positions
-        mainMenuTrans.position = new Vector3(0,Mathf.Lerp(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime),0f);
-        gameOverTrans.position = new Vector3(0,Mathf.Lerp(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime),0f);
-        
-        //approach canvases to positions
-        mainMenuTrans.position = new Vector3(0,Mathf.MoveTowards(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime * 10f),0f);
-        gameOverTrans.position = new Vector3(0,Mathf.MoveTowards(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime * 10f),0f);
+        // mainMenuTrans.position = new Vector3(0,Mathf.Lerp(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime),0f);
+        // gameOverTrans.position = new Vector3(0,Mathf.Lerp(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime),0f);
+        // //mainMenuTrans.position = new Vector3(0f,mainDest,0f);
+        // //gameOverTrans.position = new Vector3(0f,overDest,0f);
+
+        // //approach canvases to positions
+        // mainMenuTrans.position = new Vector3(0,Mathf.MoveTowards(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime * 10f),0f);
+        // gameOverTrans.position = new Vector3(0,Mathf.MoveTowards(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime * 10f),0f);
         
     }
 }
