@@ -108,6 +108,7 @@ namespace Logic
         
         [Header("World Settings")]
         public float WeedInitialSpawnTime;
+        public float WeedMinimalSpawnTime;
         public float WeedSpawnSpeedCurvePercent;
 		public int InitialRocks;
 		public int InitialWeeds;

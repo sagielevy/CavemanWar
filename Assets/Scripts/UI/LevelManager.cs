@@ -40,10 +40,10 @@ namespace UI
             var player2Input = GetPlayer2Input();
             var previousLevelState = LevelState;
 
-            // LevelState = LevelLogicManager.UpdateLevel(LevelStateGenerator,
-            //     player1Input, player2Input, previousLevelState, Time.deltaTime);
+            LevelState = LevelLogicManager.UpdateLevel(LevelStateGenerator,
+                player1Input, player2Input, previousLevelState, Time.deltaTime);
 
-            // UpdateLevelObjects(previousLevelState);
+            UpdateLevelObjects(previousLevelState);
         }
 
         private PlayerInput GetPlayer1Input()
