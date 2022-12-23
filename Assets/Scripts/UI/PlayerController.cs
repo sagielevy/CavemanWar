@@ -9,13 +9,14 @@ namespace UI
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Animator playerAnimator;
-        //[SerializeField] private SpriteRenderer playerSprite;
+        [SerializeField] private SpriteRenderer flameSprite;
         [SerializeField] private SFXmanager SFXmanager;
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
         [SerializeField] private float walkingSpeed = 0.5f;
         
         private SpriteRenderer[] hearts;
+        private SpriteRenderer playerSprite;
 
         private Logic.Player lastPlayerState;
         private LevelLogicManager logicManager;
@@ -36,11 +37,11 @@ namespace UI
         public void Start()
         {
             SFXmanager = GameObject.FindWithTag("SFX").GetComponent<SFXmanager>();
-            //playerSprite = GetComponent<SpriteRenderer>();
+            playerSprite = GetComponent<SpriteRenderer>();
             playerAnimator = GetComponent<Animator>();
 
             playerAnimator.SetBool("IsWalking",false);
-            playerAnimator.SetFloat("direction",0);
+            playerAnimator.SetInteger("direction",2);
         }
 
         public void Update()
@@ -66,12 +67,20 @@ namespace UI
             
             //direction
             if(currentPlayerState.orientation != previousPlayerState.orientation)
-                playerAnimator.SetFloat("direction",(int)currentPlayerState.orientation);
+            {
+                playerAnimator.SetInteger("direction",(int)currentPlayerState.orientation);
+
+                //flipx when facing left
+                playerSprite.flipX = currentPlayerState.orientation == Direction.Left;
+                flameSprite.flipX = currentPlayerState.orientation == Direction.Left;
+                flameSprite.flipY = currentPlayerState.orientation == Direction.Down;
+            }
 
             //walking or not
+            playerAnimator.SetBool("IsWalking",true);
             if(manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
-                playerAnimator.SetBool("IsWalking",true);//manager.IsPlayerMoving(currentPlayerState));
-            isWalking = manager.IsPlayerMoving(currentPlayerState);
+                playerAnimator.SetBool("IsWalking",manager.IsPlayerMoving(currentPlayerState));
+            //isWalking = manager.IsPlayerMoving(currentPlayerState);
             
             //trigger dotween animation
             if(currentPlayerState.position != previousPlayerState.position)
@@ -80,8 +89,7 @@ namespace UI
                 transform.DOMove(new Vector3(dest.x, dest.y, 0f),walkingSpeed);
             }
 
-            //flipx when facing left
-            //playerSprite.flipX = currentPlayerState.orientation == Direction.Left;
+            
 
             //hurt
             if(currentPlayerState.HP < previousPlayerState.HP)
