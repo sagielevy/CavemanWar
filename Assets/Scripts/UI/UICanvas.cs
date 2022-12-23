@@ -43,7 +43,7 @@ public class UICanvas : MonoBehaviour
     public void endGame(int winningPlayerIndex)
     {
         isGameOver = false;
-        
+
         //update pos dests
         overDest = 0.5f * screenH;
 
@@ -59,11 +59,11 @@ public class UICanvas : MonoBehaviour
             startGame();
 
         //lerp canvases to positions
-        mainMenuTrans.position = new Vector3(487f,Mathf.Lerp(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime),0f);
-        gameOverTrans.position = new Vector3(487f,Mathf.Lerp(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime),0f);
+        mainMenuTrans.position = new Vector3(0,Mathf.Lerp(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime),0f);
+        gameOverTrans.position = new Vector3(0,Mathf.Lerp(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime),0f);
         //approach canvases to positions
-        mainMenuTrans.position = new Vector3(487f,Mathf.MoveTowards(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime * 10f),0f);
-        gameOverTrans.position = new Vector3(487f,Mathf.MoveTowards(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime * 10f),0f);
+        mainMenuTrans.position = new Vector3(0,Mathf.MoveTowards(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime * 10f),0f);
+        gameOverTrans.position = new Vector3(0,Mathf.MoveTowards(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime * 10f),0f);
         
     }
 }
