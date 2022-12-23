@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 8300375878182298640}
   - component: {fileID: 3509710860213584405}
   - component: {fileID: -2545527960574149100}
-  - component: {fileID: 617707157542835366}
+  - component: {fileID: 3363030323155916239}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -100,11 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: -2545527960574149100}
-  playerSprite: {fileID: 617707157542835366}
+  playerSprite: {fileID: 0}
   SFXmanager: {fileID: 0}
   flamethrowerAnimator: {fileID: 818817655897301267}
   stepSfxTimerMax: 0.5
-  hearts: []
+  walkingSpeed: 0.5
 --- !u!95 &-2545527960574149100
 Animator:
   serializedVersion: 5
@@ -125,14 +125,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!212 &617707157542835366
+--- !u!212 &3363030323155916239
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8300375878182298641}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -166,14 +166,14 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 570b2d8c6ddd45d48a0d69f6806b619c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.1, y: 0.87}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
