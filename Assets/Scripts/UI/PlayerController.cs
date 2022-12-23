@@ -16,6 +16,12 @@ namespace UI
         [SerializeField] private float walkingSpeed = 0.5f;
         [SerializeField] private SpriteRenderer[] ammoSlots;
         private SpriteRenderer[] hearts;
+        
+        [Header("Body parts")]
+        [SerializeField] private GameObject bodySide;
+        [SerializeField] private GameObject bodyFront;
+        [SerializeField] private GameObject bodyBack;
+        
     
         private SpriteRenderer playerSprite;
 
@@ -43,6 +49,9 @@ namespace UI
 
             playerAnimator.SetBool("IsWalking",false);
             playerAnimator.SetInteger("direction",2);
+
+            updateAmmo(0);
+            updateDirection(Direction.Down);
         }
 
         public void Update()
@@ -60,21 +69,64 @@ namespace UI
             }
         }
 
+        private void updateAmmo(int ammoCount)
+        {
+            for(var i=0; i < ammoSlots.Length; i++)
+            {
+                ammoSlots[i].enabled = i <= ammoCount;
+            }
+        }
+        private void updateDirection(Direction dir)
+        {
+            playerAnimator.SetInteger("direction",(int)dir);
+
+            //flipx when facing left
+            playerSprite.flipX = dir == Direction.Left;
+            flameSprite.flipX = dir == Direction.Left;
+            flameSprite.flipY = dir == Direction.Down;
+
+            switch(dir)
+            {
+                case Direction.Up:
+                    bodyBack.SetActive(true);
+                    bodyFront.SetActive(false);
+                    bodySide.SetActive(false);
+                break;
+                //////////
+                case Direction.Down:
+                    bodyBack.SetActive(false);
+                    bodyFront.SetActive(true);
+                    bodySide.SetActive(false);
+                break;
+                /////////
+                case Direction.Right:
+                    bodyBack.SetActive(false);
+                    bodyFront.SetActive(false);
+                    bodySide.SetActive(true);
+                break;
+                /////////
+                case Direction.Left:
+                    bodyBack.SetActive(false);
+                    bodyFront.SetActive(false);
+                    bodySide.SetActive(true);
+                break;
+            }
+            
+        }
+
+
         public void UpdatePlayer(Logic.Player previousPlayerState,
             Logic.Player currentPlayerState, LevelSettings levelSettings, LevelLogicManager manager)
+
+
         {
             logicManager = manager;
-            Debug.Log(isWalking);
+            //Debug.Log(isWalking);
             
             //direction
             if(currentPlayerState.orientation != previousPlayerState.orientation)
             {
-                playerAnimator.SetInteger("direction",(int)currentPlayerState.orientation);
-
-                //flipx when facing left
-                playerSprite.flipX = currentPlayerState.orientation == Direction.Left;
-                flameSprite.flipX = currentPlayerState.orientation == Direction.Left;
-                flameSprite.flipY = currentPlayerState.orientation == Direction.Down;
+                updateDirection(currentPlayerState.orientation);
             }
 
             //walking or not
@@ -87,10 +139,14 @@ namespace UI
             if(currentPlayerState.position != previousPlayerState.position)
             {
                 Vector2Int dest = currentPlayerState.position;
-                transform.DOMove(new Vector3(dest.x, dest.y, 0f),walkingSpeed);
-            }
+                var boardCenter = BoardCenter(levelSettings);
+                var newPosition = new Vector3(dest.x - boardCenter.x,
+                dest.y - boardCenter.y, transform.position.z);
 
-            
+                Debug.Log(dest);
+                transform.position = newPosition;
+                //transform.DOMove(new Vector3(dest.x, dest.y, 0f),walkingSpeed);
+            }
 
             //hurt
             if(currentPlayerState.HP < previousPlayerState.HP)
@@ -123,12 +179,15 @@ namespace UI
             //ammo
             if(currentPlayerState.Ammo != previousPlayerState.Ammo)
             {
-                for(var i=0; i < ammoSlots.Length; i++)
-                {
-                    ammoSlots[i].enabled = i <= currentPlayerState.Ammo;
-                }
+                updateAmmo(currentPlayerState.Ammo);
             }
 
+        }
+
+        private Vector2 BoardCenter(LevelSettings settings)
+        {
+            return new Vector2(settings.GridWidth / 2.0f,
+                settings.GridHeight / 2.0f);
         }
     }
 }

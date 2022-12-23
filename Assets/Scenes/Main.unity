@@ -167,11 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f02fa0a657a47f19defa02a424d404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundFirePrefab: {fileID: 936983270864893514, guid: e62129dd5832f4427b26c4ed6debcbc6, type: 3}
   LevelSettings:
     WeedBurnTime: 1
-    GroundBurnTime: 0.15
-    WeedPickupTime: 0.15
+    GroundBurnTime: 0.2
+    WeedPickupTime: 0.3
     WeedCatchFireTime: 0.2
     FlamethrowerRange: 3
     AttackCooldown: 0.15
@@ -180,9 +179,9 @@ MonoBehaviour:
     PlayerAttackTime: 0.15
     InitialHP: 3
     InitialPlayer1Pos: {x: 0, y: 7}
-    InitialPlayer2Pos: {x: 13, y: 7}
-    WeedInitialSpawnTime: 0.5
-    WeedMinimalSpawnTime: 0.05
+    InitialPlayer2Pos: {x: 17, y: 7}
+    WeedInitialSpawnTime: 5
+    WeedMinimalSpawnTime: 0.3
     WeedSpawnSpeedCurvePercent: 0.08
     InitialRocks: 15
     InitialWeeds: 10
@@ -399,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca848bd5983f412ebe74bf215cc83a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundFirePrefab: {fileID: 936983270864893514, guid: e62129dd5832f4427b26c4ed6debcbc6, type: 3}
   WeedPrefab: {fileID: 5689169207849309636, guid: 37c74e6de7a4342b9a524633acd5edde, type: 3}
   Rock1Prefab: {fileID: 2038398096141788844, guid: 5ba8aac7568e04c29bd9dda809ab9ebe, type: 3}
   Rock2Prefab: {fileID: 2038398096141788844, guid: 62991225404b04727be4a194a9d0232a, type: 3}
