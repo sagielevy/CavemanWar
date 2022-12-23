@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Logic
@@ -14,5 +16,8 @@ namespace Logic
                 Direction.Left => new Vector2Int(-1, 0)
             };
         }
+
+        public readonly static Vector2Int[] AllDirectionVectors = Enum.GetValues(typeof(Direction))
+            .Cast<Direction>().Select(x => x.Vector()).ToArray();
     }
 }
