@@ -9,6 +9,8 @@ public class UICanvas : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI playerWon;
     [SerializeField] float lerpSpeed;
 
+    public bool isGameStarted = false;
+    public bool isGameOver = false;
     private BoxCollider2D collider;
     public float mainDest = 0f;    //ydest for the main menu canvas to lerp to
     public float overDest = 0f;    //ydest for the game over canvas to lerp to
@@ -35,10 +37,13 @@ public class UICanvas : MonoBehaviour
     public void startGame()
     {
         mainDest = -screenH;
+        isGameStarted = true;
     }
 
     public void endGame(int winningPlayerIndex)
     {
+        isGameOver = false;
+        
         //update pos dests
         overDest = 0.5f * screenH;
 
@@ -49,6 +54,10 @@ public class UICanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //input
+        if(!isGameStarted && Input.GetKeyDown("space"))
+            startGame();
+
         //lerp canvases to positions
         mainMenuTrans.position = new Vector3(487f,Mathf.Lerp(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime),0f);
         gameOverTrans.position = new Vector3(487f,Mathf.Lerp(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime),0f);

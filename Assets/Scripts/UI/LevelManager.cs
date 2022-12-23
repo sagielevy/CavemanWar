@@ -8,6 +8,7 @@ namespace UI
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private LevelSettings LevelSettings;
+        [SerializeField] private UICanvas UICanvas;
 
         private LevelGenerator LevelObjectsGenerator;
         private Logic.LevelLogicManager LevelLogicManager;
@@ -35,6 +36,11 @@ namespace UI
 
         private void Update()
         {
+            if(!UICanvas.isGameStarted)
+            {
+                return;
+            }
+
             var player1Input = GetPlayer1Input();
             var player2Input = GetPlayer2Input();
             var previousLevelState = LevelState;
