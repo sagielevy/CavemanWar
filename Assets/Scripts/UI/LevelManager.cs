@@ -27,19 +27,41 @@ namespace UI
             LevelObjectsGenerator = FindObjectOfType<LevelGenerator>();
             LevelLogicManager = new LevelLogicManager(LevelSettings);
 
+            InitializeLevelState();
+        }
+
+        private void InitializeLevelState()
+        {
             LevelState = LevelStateGenerator.InitialState(LevelSettings);
             var objects = LevelObjectsGenerator.GenerateInitialLevel(transform,
                 LevelState, LevelSettings);
             player1 = objects.Item1;
             player2 = objects.Item2;
             grid = objects.Item3;
+
+            gameOverCanvas.Fade(0);
+        }
+
+        private void ResetLevel()
+        {
+            LevelObjectsGenerator.ResetLevel(transform);
+
+            InitializeLevelState();
         }
 
         private void Update()
         {
-            if(!mainMenu.HasGameStarted || LevelLogicManager.IsGameOver(LevelState))
+            if (!mainMenu.HasGameStarted)
             {
                 return;
+            }
+
+            if (LevelLogicManager.IsGameOver(LevelState))
+            {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    ResetLevel();
+                }
             }
 
             var player1Input = GetPlayer1Input();
@@ -57,7 +79,7 @@ namespace UI
                 var playerDeadIndex = LevelLogicManager.
                     IsPlayerDead(LevelState.player1) ? 2 : 1;
                 gameOverCanvas.SetPlayerName(playerDeadIndex);
-                gameOverCanvas.Fade(playerDeadIndex);
+                gameOverCanvas.Fade(1);
             }
         }
 

@@ -21,7 +21,7 @@ public class GameOverCanvas : MonoBehaviour
 
     public void SetPlayerName(int name)
     {
-        playerWonText.text = $"Player {name} won!";
+        playerWonText.text = $"Player {name} won!\nPress R to play again";
     }
 
 	public void Fade(float target)

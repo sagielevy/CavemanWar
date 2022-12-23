@@ -60,10 +60,13 @@ namespace Logic
         private Player HandleMovementInput(PlayerInput input, Player playerState, Grid grid)
         {
             if (input.moveDirection is not Direction moveDirection || IsPlayerMoving(playerState) || 
-                IsPlayerFrozenAfterAttack(playerState)) {
+                IsPlayerFrozenAfterAttack(playerState))
+            {
                 return playerState;
             }
+
             Vector2Int nextTilePos = playerState.position + moveDirection.Vector();
+
             if (CanPlayerWalkThere(nextTilePos, grid))
             {
                 return MovePlayer(playerState, moveDirection);

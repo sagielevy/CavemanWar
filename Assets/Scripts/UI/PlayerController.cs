@@ -33,10 +33,17 @@ namespace UI
         private bool isWalking = false;
         private float flamethrowerLocalDistance;
 
-        public void Setup(Heart[] hearts, Direction initialDirectino)
+        public void Setup(Heart[] hearts, Direction initialDirection)
         {
             this.hearts = hearts;
-            updateDirection(initialDirectino);
+
+            foreach (var heart in hearts)
+            {
+                heart.ResetHeart();
+            }
+
+            updateDirection(initialDirection);
+            UpdateAmmo(0);
         }
 
         private void Awake()
@@ -47,13 +54,11 @@ namespace UI
 
 
             flamethrowerLocalDistance = flameTrans.localPosition.magnitude;
-
-            updateAmmo(0);
         }
 
         private void Update()
         {
-            if(isWalking)
+            if (isWalking)
             {
                 stepSfxTimer -= Time.deltaTime;
                 
@@ -66,7 +71,7 @@ namespace UI
             }
         }
 
-        private void updateAmmo(int ammoCount)
+        private void UpdateAmmo(int ammoCount)
         {
             for(var i=0; i < ammoSlots.Length; i++)
             {
@@ -146,7 +151,6 @@ namespace UI
             }
 
             //walking or not
-            //playerAnimator.SetBool("IsWalking",true);
             if (manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
             {
                 var val = manager.IsPlayerMoving(currentPlayerState);
@@ -182,15 +186,11 @@ namespace UI
                     sideAnimator.SetTrigger("hurt");
                     SFXmanager.playHurt();
 
-                    //update hearts
-                    for(var i = levelSettings.InitialHP - 1; i >= currentPlayerState.HP; i--)
-                    {
-                        hearts[i].gameObject.SetActive(false);
-                    }
+                    hearts[previousPlayerState.HP - 1].LoseHeart();
                 }
                 else
                 {
-                    hearts[0].gameObject.SetActive(false);
+                    hearts[0].LoseHeart();
                     bodySide.SetActive(false);
                     bodyBack.SetActive(false);
                     bodyFront.SetActive(false);
@@ -210,7 +210,7 @@ namespace UI
             //ammo
             if(currentPlayerState.Ammo != previousPlayerState.Ammo)
             {
-                updateAmmo(currentPlayerState.Ammo);
+                UpdateAmmo(currentPlayerState.Ammo);
             }
             
         }

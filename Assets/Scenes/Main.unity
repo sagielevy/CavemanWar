@@ -176,14 +176,14 @@ MonoBehaviour:
     AttackCooldown: 1.5
     InvincibiltyFramesTime: 1
     PlayerTileMoveTime: 0.2
-    PlayerAttackTime: 0.15
+    PlayerAttackTime: 0.5
     InitialHP: 3
     InitialPlayer1Pos: {x: 0, y: 4}
     InitialPlayer2Pos: {x: 15, y: 4}
     WeedInitialSpawnTime: 4
     WeedMinimalSpawnTime: 0.3
     WeedSpawnSpeedCurvePercent: 0.08
-    InitialRocks: 27
+    InitialRocks: 18
     InitialWeeds: 30
     GridWidth: 16
     GridHeight: 8
@@ -661,6 +661,70 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5219206954440319900, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_margin.x
+      value: -0.62716675
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206954440319900, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_margin.z
+      value: -2.4829102
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206954440319900, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206954440319900, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206954440319901, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 377.9673
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206954440319901, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 129.3115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206954440319901, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206954440319901, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -110.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201586, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_margin.x
+      value: -4.4960938
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201586, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_margin.z
+      value: -3.4526367
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201586, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201586, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201587, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 321.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201587, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 106.0984
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201587, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219206955064201587, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.0328
+      objectReference: {fileID: 0}
     - target: {fileID: 5219206955991646967, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
       propertyPath: m_Name
       value: Menus Canvas

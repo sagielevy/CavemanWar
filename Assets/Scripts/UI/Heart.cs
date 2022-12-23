@@ -7,8 +7,18 @@ public class Heart : MonoBehaviour
 {
     private Image image;
 
-    private void Start()
+    private void Awake()
     {
         image = GetComponent<Image>();    
+    }
+
+    public void LoseHeart()
+    {
+        image.enabled = false;
+    }
+
+    public void ResetHeart()
+    {
+        image.enabled = true;
     }
 }

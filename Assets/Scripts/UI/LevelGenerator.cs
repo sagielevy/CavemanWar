@@ -112,6 +112,16 @@ namespace UI
                 Quaternion.identity, parent).transform;
         }
 
+        public void ResetLevel(Transform parent)
+        {
+            foreach (Transform child in parent)
+            {
+                if (child == parent) { continue; }
+
+                Destroy(child.gameObject);
+            }
+        }
+
         private Vector2 BoardCenter(LevelSettings settings)
         {
             return new Vector2(settings.GridWidth / 2.0f,
