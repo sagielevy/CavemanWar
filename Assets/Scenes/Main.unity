@@ -172,8 +172,8 @@ MonoBehaviour:
     GroundBurnTime: 0.5
     WeedPickupTime: 0.4
     WeedCatchFireTime: 0.3
-    FlamethrowerRange: 1
-    AttackCooldown: 0.75
+    FlamethrowerRange: 3
+    AttackCooldown: 1.5
     InvincibiltyFramesTime: 1
     PlayerTileMoveTime: 0.2
     PlayerAttackTime: 0.15
@@ -457,12 +457,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -495,6 +507,10 @@ PrefabInstance:
     - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
@@ -642,7 +658,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
