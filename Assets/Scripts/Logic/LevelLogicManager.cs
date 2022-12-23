@@ -83,7 +83,46 @@ namespace Logic
 
         private void UpdateGrid(Grid grid, float deltaTime)
         {
-            throw new NotImplementedException();
+            Tile currTile;
+            for (int i = 0; i < grid.tiles.GetLength(0); i++)
+			{
+                for (int j = 0; j < grid.tiles.GetLength(1); j++)
+                {
+                    currTile = grid.tiles[i, j];
+                    if (currTile is BurnableTile burnable) 
+                    {
+                        if (!IsTileBurning(burnable) && burnable.TimeSinceBurnStart.HasValue) 
+                        { 
+                            ExtinguishBurnedTile(i, j, grid);
+                        }
+                        else if (!burnable.TimeSinceBurnStart.HasValue && burnable is Weed weed && 
+                            GetMaxTimeSinceBurnNeighbours(grid, i, j) > settings.WeedCatchFireTime)
+                        {
+                            weed.TimeSinceBurnStart = 0;
+                            grid.tiles[i , j] = weed;
+                        } 
+                    }
+                }
+            }
+        }
+
+        private float GetMaxTimeSinceBurnNeighbours(Grid grid, int x, int y) 
+        {
+            var maxTimeSinceBurn = float.MinValue;
+
+            for (int i = x - 1; i < x + 1; i++)
+            {
+                for (int j = y - 1; j < y + 1; j++) 
+                {
+                    if (i < 0 || i >= settings.GridWidth || j < 0 ||j > settings.GridHeight ||
+                        grid.tiles[i, j] is not Weed weedTile) { continue; }
+                    
+                    var neighbourTime = weedTile.TimeSinceBurnStart ?? float.MinValue;
+                    maxTimeSinceBurn = Mathf.Max(maxTimeSinceBurn, neighbourTime);
+                }
+            }
+
+            return maxTimeSinceBurn;
         }
 
         private Player HandleAttackInput(PlayerInput input, Player playerState, Grid grid)
@@ -159,6 +198,11 @@ namespace Logic
                 currIndex += player.orientation.Vector();
             }
             return player;
+        }
+
+        private void ExtinguishBurnedTile(int xIndex, int yIndex, Grid grid)
+        {
+            grid.tiles[xIndex, yIndex] = new Ground();
         }
 
         // returns a float between 0 to 1. if player is not even on weed - return 0. if can pick - return 1.
