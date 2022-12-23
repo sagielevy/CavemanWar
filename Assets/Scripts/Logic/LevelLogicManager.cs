@@ -41,7 +41,7 @@ namespace Logic
             throw new NotImplementedException();
         }
 
-        private void UpdateGrid(Grid grid)
+        private void UpdateGrid(Grid grid, float deltaTime)
         {
             throw new NotImplementedException();
         }
@@ -51,11 +51,26 @@ namespace Logic
             throw new NotImplementedException();
         }
 
+        private Player HandlePlayerHit(Player player, Grid grid)
+        {
+            throw new NotImplementedException();
+        }
 
-        private Player Attack(Grid grid, Player player, Direction direction, int range)
+        private void HandleWeedSpawn(Grid grid, float currentWeedSpawnRate, 
+            float timeSinceLastSpawn, LevelGenerator levelGenerator)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Player UpdatePlayerCounters(Player player, float deltaTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Player Attack(Grid grid, Player player, int range)
         {
             player.TimeSinceLastAttack = 0;
-            Vector2Int currIndex = player.position + direction.Vector();
+            Vector2Int currIndex = player.position + player.orientation.Vector();
             Tile currTile;
             for (int i = 0; i < range; i++)
             {
@@ -70,7 +85,7 @@ namespace Logic
                     default:
                         break;
                 }
-                currIndex += direction.Vector();
+                currIndex += player.orientation.Vector();
             }
             return player;
         }
@@ -78,8 +93,8 @@ namespace Logic
         // returns a float between 0 to 1, if player is not even on weed - return 0
         public float WeedPickupProgression(Player player, Grid grid)
         {
-            if (!IsPlayerOnWeed(player, grid)) return 0;
-            // if (player.TimeSinceLastMove / settings.WeedPickupTime;
+            // !IsPlayerOnWeed(player, grid)) return 0;
+            // if ( !player.TimeSinceLastMove.HasValue && )
             throw new NotImplementedException();
         }
 
@@ -103,9 +118,10 @@ namespace Logic
             return levelState.player1.HP == 0 || levelState.player2.HP == 0;
         }
 
-        private bool IsPlayerOnWeed(Player player, Grid grid)
+        private Weed? IsPlayerOnWeed(Player player, Grid grid)
         {
-            return grid.tiles[player.position.x, player.position.y] is Weed;
+            Tile tile = grid.tiles[player.position.x, player.position.y];
+            return tile is Weed ? (Weed) tile : null;
         }
 
         private bool CanAttack(Player player)
@@ -133,6 +149,7 @@ namespace Logic
         {
             player.position += direction.Vector();
             player.TimeSinceLastMove = 0;
+            player.orientation = direction;
             return player;
         }
 
