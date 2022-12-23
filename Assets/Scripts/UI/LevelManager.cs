@@ -111,9 +111,9 @@ namespace UI
 
         private void UpdateLevelObjects(LevelState previousLevelState)
         {
-            player1.UpdatePlayer(LevelState.player1, previousLevelState.player1,
+            player1.UpdatePlayer(previousLevelState.player1, LevelState.player1,
                 LevelSettings, LevelLogicManager);
-            player2.UpdatePlayer(LevelState.player2, previousLevelState.player2,
+            player2.UpdatePlayer(previousLevelState.player2, LevelState.player2,
                 LevelSettings, LevelLogicManager);
 
             for (int i = 0; i < LevelState.grid.tiles.GetLength(0); i++)
