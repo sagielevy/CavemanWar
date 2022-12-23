@@ -164,7 +164,7 @@ namespace UI
             //hurt
             if (currentPlayerState.HP < previousPlayerState.HP)
             {
-                if(currentPlayerState.HP > 0)
+                if (currentPlayerState.HP > 0)
                 {
                     playerAnimator.SetTrigger("hurt");
                     SFXmanager.playHurt();
@@ -177,6 +177,7 @@ namespace UI
                 }
                 else
                 {
+                    hearts[0].gameObject.SetActive(false);
                     playerAnimator.SetTrigger("die");
                     SFXmanager.playDie();
                 }
