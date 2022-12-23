@@ -128,16 +128,16 @@ namespace Logic
         {
             var maxTimeSinceBurn = float.MinValue;
 
-            for (int i = x - 1; i <= x + 1; i++)
+            foreach (var directionVector in ExtensionMethods.AllDirectionVectors)
             {
-                for (int j = y - 1; j <= y + 1; j++)
-                {
-                    if (i < 0 || i >= settings.GridWidth || j < 0 || j >= settings.GridHeight ||
-                        grid.tiles[i, j] is not Weed weedTile) { continue; }
-                    
-                    var neighbourTime = weedTile.TimeSinceBurnStart ?? float.MinValue;
-                    maxTimeSinceBurn = Mathf.Max(maxTimeSinceBurn, neighbourTime);
-                }
+                var i = directionVector.x + x;
+                var j = directionVector.y + y;
+
+                if (i < 0 || i >= settings.GridWidth || j < 0 || j >= settings.GridHeight ||
+                    grid.tiles[i, j] is not Weed weedTile) { continue; }
+
+                var neighbourTime = weedTile.TimeSinceBurnStart ?? float.MinValue;
+                maxTimeSinceBurn = Mathf.Max(maxTimeSinceBurn, neighbourTime);
             }
 
             return maxTimeSinceBurn;

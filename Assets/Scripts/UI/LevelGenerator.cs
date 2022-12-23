@@ -23,7 +23,7 @@ namespace UI
             var player1 = Instantiate(Player1Prefab, player1Position, Quaternion.identity, parent);
 
             var hearts = GameObject.FindWithTag("Hearts1").GetComponentsInChildren<Heart>();
-            player1.Setup(hearts);
+            player1.Setup(hearts, levelState.player1.orientation);
 
             var player2RelativePos = levelState.player2.position - BoardCenter(settings);
             var player2Position = new Vector3(player2RelativePos.x,
@@ -31,7 +31,7 @@ namespace UI
             var player2 = Instantiate(Player2Prefab, player2Position, Quaternion.identity, parent);
 
             hearts = GameObject.FindWithTag("Hearts2").GetComponentsInChildren<Heart>();
-            player2.Setup(hearts);
+            player2.Setup(hearts, levelState.player2.orientation);
 
             var width = levelState.grid.tiles.GetLength(0);
             var height = levelState.grid.tiles.GetLength(1);

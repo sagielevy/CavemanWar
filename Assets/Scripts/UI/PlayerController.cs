@@ -27,22 +27,17 @@ namespace UI
 
         private Logic.Player lastPlayerState;
         private LevelLogicManager logicManager;
-        private bool isInIFrame;
         private float stepSfxTimer = 0f;
         private bool isWalking = false;
         private float flamethrowerLocalDistance;
 
-        public void IFrame(bool isInIFrame)
-        {
-            this.isInIFrame = isInIFrame;
-        }
-
-        public void Setup(Heart[] hearts)
+        public void Setup(Heart[] hearts, Direction initialDirectino)
         {
             this.hearts = hearts;
+            updateDirection(initialDirectino);
         }
 
-        public void Start()
+        private void Awake()
         {
             SFXmanager = GameObject.FindWithTag("SFX").GetComponent<SFXmanager>();
             //playerSprite = GetComponent<SpriteRenderer>();
@@ -53,10 +48,9 @@ namespace UI
             flamethrowerLocalDistance = flameTrans.localPosition.magnitude;
 
             updateAmmo(0);
-            updateDirection(Direction.Down);
         }
 
-        public void Update()
+        private void Update()
         {
             if(isWalking)
             {
@@ -174,7 +168,7 @@ namespace UI
             //hurt
             if (currentPlayerState.HP < previousPlayerState.HP)
             {
-                if(currentPlayerState.HP > 0)
+                if (currentPlayerState.HP > 0)
                 {
                     playerAnimator.SetTrigger("hurt");
                     SFXmanager.playHurt();
@@ -187,6 +181,7 @@ namespace UI
                 }
                 else
                 {
+                    hearts[0].gameObject.SetActive(false);
                     playerAnimator.SetTrigger("die");
                     SFXmanager.playDie();
                 }
