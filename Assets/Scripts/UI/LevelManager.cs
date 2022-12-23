@@ -125,18 +125,25 @@ namespace UI
                     var currTile = LevelState.grid.tiles[i, j];
 
                     if (prevTile is Logic.BurnableTile prevBurnableTile &&
-                        currTile is Logic.BurnableTile currBurnableTile &&
-                        grid[i, j] is BurnableTile burnableGameTile)
+                        currTile is Logic.BurnableTile currBurnableTile)
                     {
+                        BurnableTile burnableGameTile = null;
+
+                        if (grid[i, j] != null)
+                        {
+                            burnableGameTile = grid[i, j].GetComponent<BurnableTile>();
+                        }
+
                         if (LevelLogicManager.IsTileBurning(prevBurnableTile) !=
                             LevelLogicManager.IsTileBurning(currBurnableTile))
                         {
-                            burnableGameTile.Burn(LevelLogicManager.IsTileBurning(currBurnableTile));
+                            burnableGameTile?.Burn(LevelLogicManager.IsTileBurning(currBurnableTile));
                         }
 
                         if (prevTile is Logic.Weed && currTile is Logic.Ground)
                         {
                             Destroy(grid[i, j].gameObject);
+                            grid[i, j] = null;
                         }
                         else if (prevTile is Logic.Ground && currTile is Logic.Weed)
                         {
