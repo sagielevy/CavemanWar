@@ -14,8 +14,9 @@ namespace UI
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
         [SerializeField] private float walkingSpeed = 0.5f;
-        
+        [SerializeField] private SpriteRenderer[] ammoSlots;
         private SpriteRenderer[] hearts;
+    
         private SpriteRenderer playerSprite;
 
         private Logic.Player lastPlayerState;
@@ -117,6 +118,15 @@ namespace UI
             {
                 SFXmanager.playShoot();
                 flamethrowerAnimator.SetTrigger("Burn");
+            }
+
+            //ammo
+            if(currentPlayerState.Ammo != previousPlayerState.Ammo)
+            {
+                for(var i=0; i < ammoSlots.Length; i++)
+                {
+                    ammoSlots[i].enabled = i <= currentPlayerState.Ammo;
+                }
             }
 
         }
