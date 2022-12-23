@@ -53,7 +53,8 @@ namespace UI
             if (LevelLogicManager.IsGameOver(LevelState) &&
                 !LevelLogicManager.IsGameOver(previousLevelState))
             {
-                var playerDeadIndex = LevelLogicManager.IsPlayerDead(LevelState.player1) ? 1 : 0;
+                var playerDeadIndex = LevelLogicManager.
+                    IsPlayerDead(LevelState.player1) ? 2 : 1;
                 UICanvas.endGame(playerDeadIndex);
             }
         }
