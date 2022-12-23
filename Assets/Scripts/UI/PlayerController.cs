@@ -29,6 +29,7 @@ namespace UI
         private bool isInIFrame;
         private float stepSfxTimer = 0f;
         private bool isWalking = false;
+        private float flamethrowerLocalDistance;
 
         public void IFrame(bool isInIFrame)
         {
@@ -47,7 +48,8 @@ namespace UI
             playerAnimator = GetComponent<Animator>();
 
             playerAnimator.SetBool("IsWalking",false);
-            playerAnimator.SetInteger("direction",2);
+
+            flamethrowerLocalDistance = flameTrans.localPosition.magnitude;
 
             updateAmmo(0);
             updateDirection(Direction.Down);
@@ -77,8 +79,7 @@ namespace UI
         }
         private void updateDirection(Direction dir)
         {
-            //reset flipXs
-            flameTrans.localScale = new Vector3(1,1,1);
+            //reset rotation
             sideTrans.localScale = new Vector3(1,1,1);
 
             switch(dir)
@@ -87,6 +88,10 @@ namespace UI
                     bodyBack.SetActive(true);
                     bodyFront.SetActive(false);
                     bodySide.SetActive(false);
+
+                    flamethrowerAnimator.SetBool("IsHorizontal",false);
+                    flameTrans.localPosition = Vector3.up * flamethrowerLocalDistance;
+                    flameTrans.localRotation = Quaternion.identity;
                 break;
                 //////////
                 case Direction.Down:
@@ -94,13 +99,19 @@ namespace UI
                     bodyFront.SetActive(true);
                     bodySide.SetActive(false);
 
-                    flameTrans.localScale = new Vector3(1,-1,1);
+                    flamethrowerAnimator.SetBool("IsHorizontal",false);
+                flameTrans.localPosition = Quaternion.Euler(0, 0, 180) * Vector3.up * flamethrowerLocalDistance;
+                flameTrans.localRotation = Quaternion.Euler(0, 0, 180);
                 break;
                 /////////
                 case Direction.Right:
                     bodyBack.SetActive(false);
                     bodyFront.SetActive(false);
                     bodySide.SetActive(true);
+
+                    flamethrowerAnimator.SetBool("IsHorizontal",true);
+                    flameTrans.localPosition = Vector3.right * flamethrowerLocalDistance;
+                    flameTrans.localRotation = Quaternion.identity;
                 break;
                 /////////
                 case Direction.Left:
@@ -108,7 +119,10 @@ namespace UI
                     bodyFront.SetActive(false);
                     bodySide.SetActive(true);
 
-                    flameTrans.localScale = new Vector3(-1,1,1);
+                    flamethrowerAnimator.SetBool("IsHorizontal",true); 
+                    
+                    flameTrans.localPosition = Quaternion.Euler(0, 0, 180) * Vector3.right * flamethrowerLocalDistance;
+                    flameTrans.localRotation = Quaternion.Euler(0, 0, 180);
                     sideTrans.localScale = new Vector3(-1,1,1);
                 break;
             }
@@ -174,6 +188,7 @@ namespace UI
             {
                 SFXmanager.playShoot();
                 flamethrowerAnimator.SetTrigger("Burn");
+                
             }
 
             //ammo
