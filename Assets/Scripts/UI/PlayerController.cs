@@ -117,8 +117,6 @@ namespace UI
 
         public void UpdatePlayer(Logic.Player previousPlayerState,
             Logic.Player currentPlayerState, LevelSettings levelSettings, LevelLogicManager manager)
-
-
         {
             logicManager = manager;
             //Debug.Log(isWalking);
@@ -131,8 +129,10 @@ namespace UI
 
             //walking or not
             playerAnimator.SetBool("IsWalking",true);
-            if(manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
-                playerAnimator.SetBool("IsWalking",manager.IsPlayerMoving(currentPlayerState));
+            if (manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
+            {
+                playerAnimator.SetBool("IsWalking", manager.IsPlayerMoving(currentPlayerState));
+            }
             //isWalking = manager.IsPlayerMoving(currentPlayerState);
             
             //trigger dotween animation
@@ -141,15 +141,13 @@ namespace UI
                 Vector2Int dest = currentPlayerState.position;
                 var boardCenter = BoardCenter(levelSettings);
                 var newPosition = new Vector3(dest.x - boardCenter.x,
-                dest.y - boardCenter.y, transform.position.z);
+                    dest.y - boardCenter.y, transform.position.z);
 
-                Debug.Log(dest);
-                transform.position = newPosition;
-                //transform.DOMove(new Vector3(dest.x, dest.y, 0f),walkingSpeed);
+                transform.DOMove(newPosition, walkingSpeed);
             }
 
             //hurt
-            if(currentPlayerState.HP < previousPlayerState.HP)
+            if (currentPlayerState.HP < previousPlayerState.HP)
             {
                 if(currentPlayerState.HP > 0)
                 {
