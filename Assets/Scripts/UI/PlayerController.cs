@@ -14,6 +14,7 @@ namespace UI
         [SerializeField] private float stepSfxTimerMax = 0.5f;
         [SerializeField] private SpriteRenderer[] ammoSlots;
         [SerializeField] private Animator pickupBar;
+        [SerializeField] private Animator topAnimator;
         private Heart[] hearts;
         
         [Header("Body parts")]
@@ -22,8 +23,9 @@ namespace UI
         [SerializeField] private GameObject bodyBack;
         [SerializeField] private Transform sideTrans;
         [SerializeField] private Transform flameTrans;
-        //[SerializeField] private SpriteRenderer frontSprite;
-        //[SerializeField] private SpriteRenderer backSprite;
+        [SerializeField] private Animator frontAnimator;
+        [SerializeField] private Animator backAnimator;
+        [SerializeField] private Animator sideAnimator;
 
         private Logic.Player lastPlayerState;
         private LevelLogicManager logicManager;
@@ -43,7 +45,6 @@ namespace UI
             //playerSprite = GetComponent<SpriteRenderer>();
             playerAnimator = GetComponent<Animator>();
 
-            playerAnimator.SetBool("IsWalking",false);
 
             flamethrowerLocalDistance = flameTrans.localPosition.magnitude;
 
@@ -95,8 +96,8 @@ namespace UI
                     bodySide.SetActive(false);
 
                     flamethrowerAnimator.SetBool("IsHorizontal",false);
-                flameTrans.localPosition = Quaternion.Euler(0, 0, 180) * Vector3.up * flamethrowerLocalDistance;
-                flameTrans.localRotation = Quaternion.Euler(0, 0, 180);
+                    flameTrans.localPosition = Quaternion.Euler(0, 0, 180) * Vector3.up * flamethrowerLocalDistance;
+                    flameTrans.localRotation = Quaternion.Euler(0, 0, 180);
                 break;
                 /////////
                 case Direction.Right:
@@ -148,7 +149,10 @@ namespace UI
             //playerAnimator.SetBool("IsWalking",true);
             if (manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
             {
-                playerAnimator.SetBool("IsWalking", manager.IsPlayerMoving(currentPlayerState));
+                var val = manager.IsPlayerMoving(currentPlayerState);
+                frontAnimator.SetBool("IsWalking", val);
+                backAnimator.SetBool("IsWalking", val);
+                sideAnimator.SetBool("IsWalking", val);
                 
                 if(manager.IsPlayerMoving(currentPlayerState))
                     pickupBar.SetTrigger("Stop");
@@ -171,7 +175,9 @@ namespace UI
             {
                 if (currentPlayerState.HP > 0)
                 {
-                    playerAnimator.SetTrigger("hurt");
+                    frontAnimator.SetTrigger("hurt");
+                    backAnimator.SetTrigger("hurt");
+                    sideAnimator.SetTrigger("hurt");
                     SFXmanager.playHurt();
 
                     //update hearts
@@ -183,7 +189,11 @@ namespace UI
                 else
                 {
                     hearts[0].gameObject.SetActive(false);
-                    playerAnimator.SetTrigger("die");
+                    bodySide.SetActive(false);
+                    bodyBack.SetActive(false);
+                    bodyFront.SetActive(false);
+                    topAnimator.SetTrigger("Die");
+                    
                     SFXmanager.playDie();
                 }
             }
@@ -208,5 +218,6 @@ namespace UI
             return new Vector2(settings.GridWidth / 2.0f,
                 settings.GridHeight / 2.0f);
         }
+
     }
 }
