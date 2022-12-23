@@ -129,7 +129,7 @@ namespace Logic
             {
                 for (int j = y - 1; j < y + 1; j++) 
                 {
-                    if (i < 0 || i >= settings.GridWidth || j < 0 || j > settings.GridHeight ||
+                    if (i < 0 || i >= settings.GridWidth || j < 0 || j >= settings.GridHeight ||
                         grid.tiles[i, j] is not Weed weedTile) { continue; }
                     
                     var neighbourTime = weedTile.TimeSinceBurnStart ?? float.MinValue;
@@ -195,10 +195,15 @@ namespace Logic
         private Player Attack(Grid grid, Player player, int range)
         {
             player.TimeSinceLastAttack = 0;
-            Vector2Int currIndex = player.position + player.orientation.Vector();
+            Vector2Int currIndex = player.position;
             Tile currTile;
             for (int i = 0; i < range; i++)
             {
+                currIndex += player.orientation.Vector();
+                if (currIndex.x < 0 || currIndex.x >= settings.GridWidth || currIndex.y < 0 | currIndex.y >= settings.GridHeight)
+                {
+                    return player;
+                }
                 currTile = grid.GetTileByVectorIndex(currIndex);
                 switch (currTile)
                 {
@@ -210,7 +215,7 @@ namespace Logic
                     default:
                         break;
                 }
-                currIndex += player.orientation.Vector();
+                
             }
             return player;
         }
