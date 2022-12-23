@@ -181,8 +181,9 @@ MonoBehaviour:
     InitialHP: 3
     InitialPlayer1Pos: {x: 0, y: 7}
     InitialPlayer2Pos: {x: 13, y: 7}
-    WeedInitialSpawnTime: 0.1
-    WeedSpawnSpeedCurvePercent: 0.01
+    WeedInitialSpawnTime: 0.5
+    WeedMinimalSpawnTime: 0.05
+    WeedSpawnSpeedCurvePercent: 0.08
     InitialRocks: 15
     InitialWeeds: 10
     GridWidth: 18

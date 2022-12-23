@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3363030323155916239, guid: 07395fdaf048a4a65a89d5a90af0d758, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c8a2b825f418f2948988f6f87a89b7e7, type: 3}
     - target: {fileID: 8300375878182298640, guid: 07395fdaf048a4a65a89d5a90af0d758, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8300375878182298641, guid: 07395fdaf048a4a65a89d5a90af0d758, type: 3}
       propertyPath: m_Name
-      value: Player1
+      value: Player2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07395fdaf048a4a65a89d5a90af0d758, type: 3}

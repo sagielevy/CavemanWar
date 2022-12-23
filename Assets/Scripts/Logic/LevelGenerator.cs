@@ -80,7 +80,7 @@ namespace Logic {
         /// <param name="previousState"></param>
         /// <param name="deltaTime"></param>
         /// <returns></returns>
-        public Grid SpawnNewWeeds(LevelState previousState, LevelSettings settings,
+        public (bool, Grid) SpawnNewWeeds(LevelState previousState, LevelSettings settings,
 			float deltaTime)
 		{
 			var tiles = new Tile[previousState.grid.tiles.GetLength(0),
@@ -104,7 +104,7 @@ namespace Logic {
 				tiles[pos.x, pos.y] = new Weed(null);
             }
             
-            return new(tiles);
+            return (shouldSpawn, new(tiles));
 		}
 	}
 }

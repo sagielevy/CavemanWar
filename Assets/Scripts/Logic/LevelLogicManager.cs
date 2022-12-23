@@ -37,7 +37,7 @@ namespace Logic
             var newLevelState = new LevelState(grid, player1, player2,
                 currLevelState.currentWeedSpawnRate, currLevelState.timeSinceLastSpawn);
 
-            return HandleWeedSpawn(newLevelState, levelGenerator);
+            return HandleWeedSpawn(newLevelState, levelGenerator, deltaTime);
         }
 
         private Grid CloneGrid(Grid origin)
@@ -149,9 +149,24 @@ namespace Logic
             return player;
         }
 
-        private LevelState HandleWeedSpawn(LevelState levelState, LevelGenerator levelGenerator)
+        private LevelState HandleWeedSpawn(LevelState levelState, LevelGenerator levelGenerator,
+            float deltaTime)
         {
-            throw new NotImplementedException();
+            var (hasSpawned, newGrid) = levelGenerator.SpawnNewWeeds(levelState, settings, deltaTime);
+            var currentWeedSpawnRate = Mathf.Min(levelState.currentWeedSpawnRate -
+                settings.WeedSpawnSpeedCurvePercent * deltaTime,
+                settings.WeedMinimalSpawnTime);
+
+            var timeSinceLastSpawn = hasSpawned ? 0 : levelState.timeSinceLastSpawn + deltaTime;
+
+            return new LevelState()
+            {
+                currentWeedSpawnRate = currentWeedSpawnRate,
+                timeSinceLastSpawn = timeSinceLastSpawn,
+                grid = newGrid,
+                player1 = levelState.player1,
+                player2 = levelState.player2
+            };
         }
 
         private Player UpdatePlayerCounters(Player player, float deltaTime)
