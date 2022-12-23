@@ -72,7 +72,7 @@ namespace UI
         {
             for(var i=0; i < ammoSlots.Length; i++)
             {
-                ammoSlots[i].enabled = i <= ammoCount;
+                ammoSlots[i].enabled = i < ammoCount;
             }
         }
         private void updateDirection(Direction dir)
