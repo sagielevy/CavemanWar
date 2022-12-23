@@ -13,7 +13,6 @@ namespace UI
         [SerializeField] private SFXmanager SFXmanager;
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
-        [SerializeField] private float walkingSpeed = 0.5f;
         [SerializeField] private SpriteRenderer[] ammoSlots;
         private SpriteRenderer[] hearts;
         
@@ -88,14 +87,14 @@ namespace UI
             switch(dir)
             {
                 case Direction.Up:
-                    bodyBack.SetActive(true);
-                    bodyFront.SetActive(false);
+                    bodyBack.SetActive(false);
+                    bodyFront.SetActive(true);
                     bodySide.SetActive(false);
                 break;
                 //////////
                 case Direction.Down:
-                    bodyBack.SetActive(false);
-                    bodyFront.SetActive(true);
+                    bodyBack.SetActive(true);
+                    bodyFront.SetActive(false);
                     bodySide.SetActive(false);
                 break;
                 /////////
@@ -143,7 +142,8 @@ namespace UI
                 var newPosition = new Vector3(dest.x - boardCenter.x,
                     dest.y - boardCenter.y, transform.position.z);
 
-                transform.DOMove(newPosition, walkingSpeed);
+                transform.DOComplete();
+                transform.DOMove(newPosition, levelSettings.PlayerTileMoveTime);
             }
 
             //hurt
