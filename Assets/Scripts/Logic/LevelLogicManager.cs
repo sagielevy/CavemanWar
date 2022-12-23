@@ -102,6 +102,21 @@ namespace Logic
                             grid.tiles[i , j] = weed;
                         } 
                     }
+
+                    switch(currTile)
+                    {
+                        case Weed weed:
+                            weed.TimeSinceBurnStart += deltaTime;
+                            weed.TimeSinceSpawn += deltaTime;
+                            grid.tiles[i, j] = weed;
+                            break;
+                        case Ground ground:
+                            ground.TimeSinceBurnStart += deltaTime;
+                            grid.tiles[i, j] = ground;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
