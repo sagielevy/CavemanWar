@@ -28,7 +28,7 @@ namespace Logic
             HP = hp;
             Ammo = 0;
             TimeSinceLastHit = null;
-            TimeSinceLastAttack = null;
+            TimeSinceLastAttack = 0;
             TimeSinceLastMove = null;
             this.position = position;
             this.orientation = orientation;

@@ -148,7 +148,6 @@ namespace UI
             {
                 playerAnimator.SetBool("IsWalking", manager.IsPlayerMoving(currentPlayerState));
             }
-            //isWalking = manager.IsPlayerMoving(currentPlayerState);
             
             //trigger dotween animation
             if(currentPlayerState.position != previousPlayerState.position)
@@ -188,7 +187,6 @@ namespace UI
             {
                 SFXmanager.playShoot();
                 flamethrowerAnimator.SetTrigger("Burn");
-                
             }
 
             //ammo
