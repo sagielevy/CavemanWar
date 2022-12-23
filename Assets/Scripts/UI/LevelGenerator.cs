@@ -31,7 +31,7 @@ namespace UI
             var player2 = Instantiate(Player2Prefab, player2Position, Quaternion.identity, parent);
 
             hearts = GameObject.FindWithTag("Hearts2").GetComponentsInChildren<SpriteRenderer>();
-            player1.Setup(hearts);
+            player2.Setup(hearts);
 
             var width = levelState.grid.tiles.GetLength(0);
             var height = levelState.grid.tiles.GetLength(1);
