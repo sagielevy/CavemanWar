@@ -36,7 +36,7 @@ namespace UI
 
         private void Update()
         {
-            if(!UICanvas.isGameStarted)
+            if(!UICanvas.isGameStarted || LevelLogicManager.IsGameOver(LevelState))
             {
                 return;
             }
@@ -49,6 +49,13 @@ namespace UI
                 player1Input, player2Input, previousLevelState, Time.deltaTime);
 
             UpdateLevelObjects(previousLevelState);
+
+            if (LevelLogicManager.IsGameOver(LevelState) &&
+                !LevelLogicManager.IsGameOver(previousLevelState))
+            {
+                var playerDeadIndex = LevelLogicManager.IsPlayerDead(LevelState.player1) ? 1 : 0;
+                UICanvas.endGame(playerDeadIndex);
+            }
         }
 
         private PlayerInput GetPlayer1Input()

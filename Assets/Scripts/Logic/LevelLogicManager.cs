@@ -258,7 +258,12 @@ namespace Logic
 
         public bool IsGameOver(LevelState levelState)
         {
-            return levelState.player1.HP == 0 || levelState.player2.HP == 0;
+            return IsPlayerDead(levelState.player1) || IsPlayerDead(levelState.player2);
+        }
+
+        public bool IsPlayerDead(Player player)
+        {
+            return player.HP == 0;
         }
 
         private Weed? IsPlayerOnWeed(Player player, Grid grid)

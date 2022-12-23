@@ -155,7 +155,9 @@ namespace UI
                 sideAnimator.SetBool("IsWalking", val);
                 
                 if(manager.IsPlayerMoving(currentPlayerState))
+                {
                     pickupBar.SetTrigger("Stop");
+                }
             }
             
             //trigger dotween animation
