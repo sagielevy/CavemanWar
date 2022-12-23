@@ -9,7 +9,7 @@ namespace UI
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Animator playerAnimator;
-        [SerializeField] private SpriteRenderer playerSprite;
+        //[SerializeField] private SpriteRenderer playerSprite;
         [SerializeField] private SFXmanager SFXmanager;
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
@@ -36,8 +36,11 @@ namespace UI
         public void Start()
         {
             SFXmanager = GameObject.FindWithTag("SFX").GetComponent<SFXmanager>();
-            playerSprite = GetComponent<SpriteRenderer>();
+            //playerSprite = GetComponent<SpriteRenderer>();
             playerAnimator = GetComponent<Animator>();
+
+            playerAnimator.SetBool("IsWalking",false);
+            playerAnimator.SetFloat("direction",0);
         }
 
         public void Update()
@@ -59,14 +62,15 @@ namespace UI
             Logic.Player currentPlayerState, LevelSettings levelSettings, LevelLogicManager manager)
         {
             logicManager = manager;
-
+            Debug.Log(isWalking);
+            
             //direction
             if(currentPlayerState.orientation != previousPlayerState.orientation)
                 playerAnimator.SetFloat("direction",(int)currentPlayerState.orientation);
 
             //walking or not
             if(manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
-                playerAnimator.SetBool("isWalking",manager.IsPlayerMoving(currentPlayerState));
+                playerAnimator.SetBool("IsWalking",true);//manager.IsPlayerMoving(currentPlayerState));
             isWalking = manager.IsPlayerMoving(currentPlayerState);
             
             //trigger dotween animation
@@ -77,7 +81,7 @@ namespace UI
             }
 
             //flipx when facing left
-            playerSprite.flipX = currentPlayerState.orientation == Direction.Left;
+            //playerSprite.flipX = currentPlayerState.orientation == Direction.Left;
 
             //hurt
             if(currentPlayerState.HP < previousPlayerState.HP)
