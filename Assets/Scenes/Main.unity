@@ -178,16 +178,15 @@ MonoBehaviour:
     PlayerTileMoveTime: 0.2
     PlayerAttackTime: 0.15
     InitialHP: 3
-    InitialPlayer1Pos: {x: 0, y: 7}
-    InitialPlayer2Pos: {x: 17, y: 7}
+    InitialPlayer1Pos: {x: 0, y: 4}
+    InitialPlayer2Pos: {x: 15, y: 4}
     WeedInitialSpawnTime: 5
     WeedMinimalSpawnTime: 0.3
     WeedSpawnSpeedCurvePercent: 0.08
     InitialRocks: 15
     InitialWeeds: 10
-    GridWidth: 18
-    GridHeight: 10
-  UICanvas: {fileID: 1316753783}
+    GridWidth: 16
+    GridHeight: 8
 --- !u!1001 &421542270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,17 +345,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3873ed8efe0931544bd4bb84af97b45a, type: 3}
---- !u!114 &1316753783 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5219206955991646966, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
-  m_PrefabInstance: {fileID: 1701732810}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f86257d5b7ea514da2e7abed39318c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1396767843
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +463,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961603693447973129, guid: 946713f95f7fa4eb3b519833e555c8c5, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -517,7 +509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5219206955991646967, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5219206955991646970, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
       propertyPath: m_Pivot.x
@@ -602,22 +594,6 @@ PrefabInstance:
     - target: {fileID: 5219206955991646970, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219206956098299539, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 805.8615
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219206956098299539, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 335.7855
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219206956098299539, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.5616
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219206956098299539, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -6.5372
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a69dceab7aee3547abd4017a239939b, type: 3}

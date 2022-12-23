@@ -138,7 +138,8 @@ namespace UI
             }
 
             //weed
-            if(manager.WeedPickupProgression(currentPlayerState,grid) > 0f)
+            if(manager.WeedPickupProgression(currentPlayerState, grid) > 0 &&
+               manager.WeedPickupProgression(previousPlayerState, grid) < float.Epsilon)
             {
                 pickupBar.SetTrigger("Start");
             }
