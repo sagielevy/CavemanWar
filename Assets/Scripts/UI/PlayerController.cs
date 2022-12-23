@@ -9,7 +9,6 @@ namespace UI
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Animator playerAnimator;
-        [SerializeField] private SpriteRenderer flameSprite;
         [SerializeField] private SFXmanager SFXmanager;
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
@@ -20,9 +19,10 @@ namespace UI
         [SerializeField] private GameObject bodySide;
         [SerializeField] private GameObject bodyFront;
         [SerializeField] private GameObject bodyBack;
-        
-    
-        private SpriteRenderer playerSprite;
+        [SerializeField] private Transform sideTrans;
+        [SerializeField] private Transform flameTrans;
+        //[SerializeField] private SpriteRenderer frontSprite;
+        //[SerializeField] private SpriteRenderer backSprite;
 
         private Logic.Player lastPlayerState;
         private LevelLogicManager logicManager;
@@ -43,7 +43,7 @@ namespace UI
         public void Start()
         {
             SFXmanager = GameObject.FindWithTag("SFX").GetComponent<SFXmanager>();
-            playerSprite = GetComponent<SpriteRenderer>();
+            //playerSprite = GetComponent<SpriteRenderer>();
             playerAnimator = GetComponent<Animator>();
 
             playerAnimator.SetBool("IsWalking",false);
@@ -77,25 +77,24 @@ namespace UI
         }
         private void updateDirection(Direction dir)
         {
-            playerAnimator.SetInteger("direction",(int)dir);
-
-            //flipx when facing left
-            playerSprite.flipX = dir == Direction.Left;
-            flameSprite.flipX = dir == Direction.Left;
-            flameSprite.flipY = dir == Direction.Down;
+            //reset flipXs
+            flameTrans.localScale = new Vector3(1,1,1);
+            sideTrans.localScale = new Vector3(1,1,1);
 
             switch(dir)
             {
                 case Direction.Up:
-                    bodyBack.SetActive(false);
-                    bodyFront.SetActive(true);
+                    bodyBack.SetActive(true);
+                    bodyFront.SetActive(false);
                     bodySide.SetActive(false);
                 break;
                 //////////
                 case Direction.Down:
-                    bodyBack.SetActive(true);
-                    bodyFront.SetActive(false);
+                    bodyBack.SetActive(false);
+                    bodyFront.SetActive(true);
                     bodySide.SetActive(false);
+
+                    flameTrans.localScale = new Vector3(1,-1,1);
                 break;
                 /////////
                 case Direction.Right:
@@ -108,6 +107,9 @@ namespace UI
                     bodyBack.SetActive(false);
                     bodyFront.SetActive(false);
                     bodySide.SetActive(true);
+
+                    flameTrans.localScale = new Vector3(-1,1,1);
+                    sideTrans.localScale = new Vector3(-1,1,1);
                 break;
             }
             

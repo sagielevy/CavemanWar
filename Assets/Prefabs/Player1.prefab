@@ -2256,7 +2256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: -2545527960574149100}
-  flameSprite: {fileID: 4361220334123114627}
   SFXmanager: {fileID: 0}
   flamethrowerAnimator: {fileID: 818817655897301267}
   stepSfxTimerMax: 0.5
@@ -2269,6 +2268,8 @@ MonoBehaviour:
   bodySide: {fileID: 7888597956859730369}
   bodyFront: {fileID: 9076634082429355541}
   bodyBack: {fileID: 2149987131758506790}
+  sideTrans: {fileID: 5969289592205222001}
+  flameTrans: {fileID: 5164522753709903170}
 --- !u!95 &-2545527960574149100
 Animator:
   serializedVersion: 5
