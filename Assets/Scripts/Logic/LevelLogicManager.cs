@@ -90,6 +90,7 @@ namespace Logic
         {
             if (input.didTryAttack && CanAttack(playerState))
             {
+                playerState.Ammo -= 1;
                 return Attack(grid, playerState, settings.FlamethrowerRange);
             }
 
@@ -98,7 +99,15 @@ namespace Logic
 
         private Player HandlePlayerHit(Player player, Grid grid)
         {
-            throw new NotImplementedException();
+            if (!IsPlayerInvincible(player) &&
+                grid.tiles[player.position.x, player.position.y] is BurnableTile burnableTile &&
+                IsTileBurning(burnableTile))
+            {
+                player.HP -= 1;
+                player.TimeSinceLastHit = 0;
+            }
+
+            return player;
         }
 
         private LevelState HandleWeedSpawn(LevelState levelState, LevelGenerator levelGenerator)
@@ -108,7 +117,10 @@ namespace Logic
 
         private Player UpdatePlayerCounters(Player player, float deltaTime)
         {
-            throw new NotImplementedException();
+            player.TimeSinceLastAttack += deltaTime;
+            player.TimeSinceLastHit += deltaTime;
+            player.TimeSinceLastMove += deltaTime;
+            return player;
         }
 
         private Player Attack(Grid grid, Player player, int range)
