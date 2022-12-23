@@ -246,7 +246,7 @@ namespace Logic
 
         public bool IsPlayerInvincible(Player player)
         {
-            return player.TimeSinceLastAttack < settings.InvincibiltyFramesTime;
+            return player.TimeSinceLastHit < settings.InvincibiltyFramesTime;
         }
 
         public bool  IsTileBurning(BurnableTile tile)
