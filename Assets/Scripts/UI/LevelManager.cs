@@ -7,7 +7,6 @@ namespace UI
 {
     public class LevelManager : MonoBehaviour
     {
-        [SerializeField] private GroundFire GroundFirePrefab;
         [SerializeField] private LevelSettings LevelSettings;
 
         private LevelGenerator LevelObjectsGenerator;
@@ -127,26 +126,23 @@ namespace UI
                     if (prevTile is Logic.BurnableTile prevBurnableTile &&
                         currTile is Logic.BurnableTile currBurnableTile)
                     {
-                        BurnableTile burnableGameTile = null;
-
-                        if (grid[i, j] != null)
-                        {
-                            burnableGameTile = grid[i, j].GetComponent<BurnableTile>();
-                        }
+                        BurnableTile burnableGameTile = grid[i, j].GetComponent<BurnableTile>();
 
                         if (LevelLogicManager.IsTileBurning(prevBurnableTile) !=
                             LevelLogicManager.IsTileBurning(currBurnableTile))
                         {
-                            burnableGameTile?.Burn(LevelLogicManager.IsTileBurning(currBurnableTile));
+                            burnableGameTile.Burn(LevelLogicManager.IsTileBurning(currBurnableTile));
                         }
 
                         if (prevTile is Logic.Weed && currTile is Logic.Ground)
                         {
                             Destroy(grid[i, j].gameObject);
-                            grid[i, j] = null;
+                            grid[i, j] = LevelObjectsGenerator.MakeGroundFire(new Vector2Int(i, j),
+                                transform, LevelSettings);
                         }
                         else if (prevTile is Logic.Ground && currTile is Logic.Weed)
                         {
+                            Destroy(grid[i, j].gameObject);
                             grid[i, j] = LevelObjectsGenerator.MakeWeed(new Vector2Int(i, j),
                                 transform, LevelSettings);
                         }

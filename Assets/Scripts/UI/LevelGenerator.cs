@@ -7,7 +7,8 @@ namespace UI
 {
 	public class LevelGenerator : MonoBehaviour
 	{
-		[SerializeField] private Weed WeedPrefab;
+        [SerializeField] private GroundFire GroundFirePrefab;
+        [SerializeField] private Weed WeedPrefab;
         [SerializeField] private Transform Rock1Prefab;
         [SerializeField] private Transform Rock2Prefab;
         [SerializeField] private PlayerController Player1Prefab;
@@ -51,7 +52,8 @@ namespace UI
                         case Logic.Rock:
                             grid[i, j] = MakeRock(index, parent, settings);
                             break;
-                        default:
+                        case Logic.Ground:
+                            grid[i, j] = MakeGroundFire(index, parent, settings);
                             break;
                     }
                 }
@@ -91,6 +93,17 @@ namespace UI
                 index.y - boardCenter.y);
 
             return Instantiate(WeedPrefab, position,
+                Quaternion.identity, parent).transform;
+        }
+
+        public Transform MakeGroundFire(Vector2Int index, Transform parent,
+            LevelSettings settings)
+        {
+            var boardCenter = BoardCenter(settings);
+            var position = new Vector3(index.x - boardCenter.x,
+                index.y - boardCenter.y);
+
+            return Instantiate(GroundFirePrefab, position,
                 Quaternion.identity, parent).transform;
         }
 
