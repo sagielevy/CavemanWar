@@ -8,7 +8,8 @@ namespace UI
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private LevelSettings LevelSettings;
-        [SerializeField] private UICanvas UICanvas;
+        [SerializeField] private MainMenu mainMenu;
+        [SerializeField] private GameOverCanvas gameOverCanvas;
 
         private LevelGenerator LevelObjectsGenerator;
         private Logic.LevelLogicManager LevelLogicManager;
@@ -36,7 +37,7 @@ namespace UI
 
         private void Update()
         {
-            if(!UICanvas.isGameStarted || LevelLogicManager.IsGameOver(LevelState))
+            if(!mainMenu.HasGameStarted || LevelLogicManager.IsGameOver(LevelState))
             {
                 return;
             }
@@ -55,7 +56,8 @@ namespace UI
             {
                 var playerDeadIndex = LevelLogicManager.
                     IsPlayerDead(LevelState.player1) ? 2 : 1;
-                UICanvas.endGame(playerDeadIndex);
+                gameOverCanvas.SetPlayerName(playerDeadIndex);
+                gameOverCanvas.Fade(playerDeadIndex);
             }
         }
 
