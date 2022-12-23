@@ -22,7 +22,7 @@ namespace UI
                 player1RelativePos.y, -2);
             var player1 = Instantiate(Player1Prefab, player1Position, Quaternion.identity, parent);
 
-            var hearts = GameObject.FindWithTag("Hearts1").GetComponentsInChildren<SpriteRenderer>();
+            var hearts = GameObject.FindWithTag("Hearts1").GetComponentsInChildren<Heart>();
             player1.Setup(hearts);
 
             var player2RelativePos = levelState.player2.position - BoardCenter(settings);
@@ -30,7 +30,7 @@ namespace UI
                 player2RelativePos.y, -2);
             var player2 = Instantiate(Player2Prefab, player2Position, Quaternion.identity, parent);
 
-            hearts = GameObject.FindWithTag("Hearts2").GetComponentsInChildren<SpriteRenderer>();
+            hearts = GameObject.FindWithTag("Hearts2").GetComponentsInChildren<Heart>();
             player2.Setup(hearts);
 
             var width = levelState.grid.tiles.GetLength(0);
