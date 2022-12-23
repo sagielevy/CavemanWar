@@ -73,7 +73,7 @@ namespace Logic
         
         private Player HandleWeedPickup(Player player, Grid grid)
         {
-            if (WeedPickupProgression(player, grid) == 1)
+            if (Mathf.Abs(1 - WeedPickupProgression(player, grid)) < float.Epsilon)
             {
                 player.Ammo += 1;
                 grid.tiles[player.position.x, player.position.y] = new Ground();
@@ -227,12 +227,16 @@ namespace Logic
         public float WeedPickupProgression(Player player, Grid grid)
         {
             Weed? tile = IsPlayerOnWeed(player, grid);
+
             if (tile is not Weed weed) return 0;
+
             if (!player.TimeSinceLastMove.HasValue)
             {
                 return Mathf.Clamp01(weed.TimeSinceSpawn / settings.WeedPickupTime);
-            } else {
-                float shorterTime = Mathf.Min((float) player.TimeSinceLastMove, weed.TimeSinceSpawn);
+            }
+            else
+            {
+                float shorterTime = Mathf.Min((float)player.TimeSinceLastMove, weed.TimeSinceSpawn);
                 return Mathf.Clamp01(shorterTime);
             }
         }
