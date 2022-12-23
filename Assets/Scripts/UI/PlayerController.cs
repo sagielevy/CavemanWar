@@ -13,7 +13,7 @@ namespace UI
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
         [SerializeField] private SpriteRenderer[] ammoSlots;
-        private SpriteRenderer[] hearts;
+        private Heart[] hearts;
         
         [Header("Body parts")]
         [SerializeField] private GameObject bodySide;
@@ -35,7 +35,7 @@ namespace UI
             this.isInIFrame = isInIFrame;
         }
 
-        public void Setup(SpriteRenderer[] hearts)
+        public void Setup(Heart[] hearts)
         {
             this.hearts = hearts;
         }
@@ -157,10 +157,10 @@ namespace UI
                     SFXmanager.playHurt();
 
                     //update hearts
-                    for(var i=levelSettings.InitialHP; i > currentPlayerState.HP; i--)
+                    for(var i = levelSettings.InitialHP - 1; i >= currentPlayerState.HP; i--)
                     {
-                        hearts[i].enabled = false;
-                    } 
+                        hearts[i].gameObject.SetActive(false);
+                    }
                 }
                 else
                 {

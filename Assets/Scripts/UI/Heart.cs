@@ -1,20 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Heart : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
+    private Image image;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();    
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        image = GetComponent<Image>();    
     }
 }
