@@ -83,7 +83,7 @@ namespace UI
             // Arrows and Enter
             var tryAttacking = false;
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Return))
             {
                 tryAttacking = true;
             }

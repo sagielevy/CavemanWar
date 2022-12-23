@@ -180,7 +180,7 @@ MonoBehaviour:
     PlayerAttackTime: 0.15
     InitialHP: 3
     InitialPlayer1Pos: {x: 0, y: 7}
-    InitialPlayer2Pos: {x: 13, y: 7}
+    InitialPlayer2Pos: {x: 17, y: 7}
     WeedInitialSpawnTime: 5
     WeedMinimalSpawnTime: 0.3
     WeedSpawnSpeedCurvePercent: 0.08
