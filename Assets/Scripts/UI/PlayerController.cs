@@ -26,22 +26,17 @@ namespace UI
 
         private Logic.Player lastPlayerState;
         private LevelLogicManager logicManager;
-        private bool isInIFrame;
         private float stepSfxTimer = 0f;
         private bool isWalking = false;
         private float flamethrowerLocalDistance;
 
-        public void IFrame(bool isInIFrame)
-        {
-            this.isInIFrame = isInIFrame;
-        }
-
-        public void Setup(Heart[] hearts)
+        public void Setup(Heart[] hearts, Direction initialDirectino)
         {
             this.hearts = hearts;
+            updateDirection(initialDirectino);
         }
 
-        public void Start()
+        private void Awake()
         {
             SFXmanager = GameObject.FindWithTag("SFX").GetComponent<SFXmanager>();
             //playerSprite = GetComponent<SpriteRenderer>();
@@ -52,10 +47,9 @@ namespace UI
             flamethrowerLocalDistance = flameTrans.localPosition.magnitude;
 
             updateAmmo(0);
-            updateDirection(Direction.Down);
         }
 
-        public void Update()
+        private void Update()
         {
             if(isWalking)
             {
