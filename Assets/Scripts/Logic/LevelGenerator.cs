@@ -88,19 +88,25 @@ namespace Logic {
 		{
 			var tiles = new Tile[previousState.grid.tiles.GetLength(0),
 				previousState.grid.tiles.GetLength(1)];
+			var doesGroundTileExist = false;
 
 			for (int i = 0; i < previousState.grid.tiles.GetLength(0); i++)
 			{
                 for (int j = 0; j < previousState.grid.tiles.GetLength(1); j++)
                 {
 					tiles[i, j] = previousState.grid.tiles[i, j];
+
+					if (tiles[i, j] is Ground)
+					{
+						doesGroundTileExist = true;
+                    }
                 }
             }
 
 			var shouldSpawn = previousState.currentWeedSpawnRate <
 				previousState.timeSinceLastSpawn + deltaTime;
 
-			if (shouldSpawn)
+			if (shouldSpawn && doesGroundTileExist)
 			{
                 var pos = GenerateRandomPosInGrid(previousState.grid,
 					settings.GridWidth, settings.GridHeight);
