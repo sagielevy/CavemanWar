@@ -155,18 +155,18 @@ namespace UI
                 {
                     playerAnimator.SetTrigger("hurt");
                     SFXmanager.playHurt();
+
+                    //update hearts
+                    for(var i=levelSettings.InitialHP; i > currentPlayerState.HP; i--)
+                    {
+                        hearts[i].enabled = false;
+                    } 
                 }
                 else
                 {
                     playerAnimator.SetTrigger("die");
                     SFXmanager.playDie();
                 }
-
-                //update hearts
-                for(var i=levelSettings.InitialHP; i > currentPlayerState.HP; i--)
-                {
-                    hearts[i].enabled = false;
-                } 
             }
 
             //shoot
