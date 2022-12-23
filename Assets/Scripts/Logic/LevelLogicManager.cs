@@ -89,17 +89,20 @@ namespace Logic
                 for (int j = 0; j < grid.tiles.GetLength(1); j++)
                 {
                     currTile = grid.tiles[i, j];
+
                     if (currTile is BurnableTile burnable) 
                     {
                         if (!IsTileBurning(burnable) && burnable.TimeSinceBurnStart.HasValue) 
-                        { 
-                            ExtinguishBurnedTile(i, j, grid);
+                        {
+                            grid.tiles[i, j] = new Ground();
+                            currTile = grid.tiles[i, j];
                         }
                         else if (!burnable.TimeSinceBurnStart.HasValue && burnable is Weed weed && 
                             GetMaxTimeSinceBurnNeighbours(grid, i, j) > settings.WeedCatchFireTime)
                         {
                             weed.TimeSinceBurnStart = 0;
                             grid.tiles[i , j] = weed;
+                            currTile = weed;
                         } 
                     }
 
@@ -220,11 +223,6 @@ namespace Logic
             return player;
         }
 
-        private void ExtinguishBurnedTile(int xIndex, int yIndex, Grid grid)
-        {
-            grid.tiles[xIndex, yIndex] = new Ground();
-        }
-
         // returns a float between 0 to 1. if player is not even on weed - return 0. if can pick - return 1.
         public float WeedPickupProgression(Player player, Grid grid)
         {
@@ -249,7 +247,7 @@ namespace Logic
             return player.TimeSinceLastHit < settings.InvincibiltyFramesTime;
         }
 
-        public bool  IsTileBurning(BurnableTile tile)
+        public bool IsTileBurning(BurnableTile tile)
         {
             return tile.TimeSinceBurnStart <= tile.BurnTime(settings);
         }
