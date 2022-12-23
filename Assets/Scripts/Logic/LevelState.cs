@@ -22,6 +22,7 @@ namespace Logic
         public float? TimeSinceLastMove;
         public Vector2Int position;
         public Direction orientation;
+        
 
         public Player(int hp, Vector2Int position, Direction orientation)
         {

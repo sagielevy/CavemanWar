@@ -61,6 +61,7 @@ public class UICanvas : MonoBehaviour
         //lerp canvases to positions
         mainMenuTrans.position = new Vector3(0,Mathf.Lerp(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime),0f);
         gameOverTrans.position = new Vector3(0,Mathf.Lerp(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime),0f);
+        
         //approach canvases to positions
         mainMenuTrans.position = new Vector3(0,Mathf.MoveTowards(mainMenuTrans.position.y,mainDest,lerpSpeed * Time.deltaTime * 10f),0f);
         gameOverTrans.position = new Vector3(0,Mathf.MoveTowards(gameOverTrans.position.y,overDest,lerpSpeed * Time.deltaTime * 10f),0f);

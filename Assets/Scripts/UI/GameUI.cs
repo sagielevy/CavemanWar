@@ -6,6 +6,7 @@ public class GameUI : MonoBehaviour
 {
     public bool isGameStarted = false;
     public bool isGameOver = false;
+    
     // Start is called before the first frame update
     void Start()
     {
