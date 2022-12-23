@@ -173,9 +173,9 @@ MonoBehaviour:
     WeedPickupTime: 0.3
     WeedCatchFireTime: 0.2
     FlamethrowerRange: 3
-    AttackCooldown: 0.15
+    AttackCooldown: 0.75
     InvincibiltyFramesTime: 1
-    PlayerTileMoveTime: 0.25
+    PlayerTileMoveTime: 0.2
     PlayerAttackTime: 0.15
     InitialHP: 3
     InitialPlayer1Pos: {x: 0, y: 7}
