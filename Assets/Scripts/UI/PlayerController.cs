@@ -16,6 +16,12 @@ namespace UI
         [SerializeField] private float walkingSpeed = 0.5f;
         [SerializeField] private SpriteRenderer[] ammoSlots;
         private SpriteRenderer[] hearts;
+        
+        [Header("Body parts")]
+        [SerializeField] private GameObject bodySide;
+        [SerializeField] private GameObject bodyFront;
+        [SerializeField] private GameObject bodyBack;
+        
     
         private SpriteRenderer playerSprite;
 
@@ -64,7 +70,7 @@ namespace UI
             Logic.Player currentPlayerState, LevelSettings levelSettings, LevelLogicManager manager)
         {
             logicManager = manager;
-            Debug.Log(isWalking);
+            //Debug.Log(isWalking);
             
             //direction
             if(currentPlayerState.orientation != previousPlayerState.orientation)
@@ -75,6 +81,33 @@ namespace UI
                 playerSprite.flipX = currentPlayerState.orientation == Direction.Left;
                 flameSprite.flipX = currentPlayerState.orientation == Direction.Left;
                 flameSprite.flipY = currentPlayerState.orientation == Direction.Down;
+
+                switch(currentPlayerState.orientation)
+                {
+                    case Direction.Up:
+                        bodyBack.SetActive(true);
+                        bodyFront.SetActive(false);
+                        bodyBack.SetActive(false);
+                    break;
+                    //////////
+                    case Direction.Down:
+                        bodyBack.SetActive(false);
+                        bodyFront.SetActive(true);
+                        bodyBack.SetActive(false);
+                    break;
+                    /////////
+                    case Direction.Right:
+                        bodyBack.SetActive(false);
+                        bodyFront.SetActive(false);
+                        bodyBack.SetActive(true);
+                    break;
+                    /////////
+                    case Direction.Left:
+                        bodyBack.SetActive(false);
+                        bodyFront.SetActive(false);
+                        bodyBack.SetActive(true);
+                    break;
+                }
             }
 
             //walking or not
@@ -89,8 +122,6 @@ namespace UI
                 Vector2Int dest = currentPlayerState.position;
                 transform.DOMove(new Vector3(dest.x, dest.y, 0f),walkingSpeed);
             }
-
-            
 
             //hurt
             if(currentPlayerState.HP < previousPlayerState.HP)
