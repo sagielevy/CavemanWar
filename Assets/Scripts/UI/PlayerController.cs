@@ -13,6 +13,7 @@ namespace UI
         [SerializeField] private Animator flamethrowerAnimator;
         [SerializeField] private float stepSfxTimerMax = 0.5f;
         [SerializeField] private SpriteRenderer[] ammoSlots;
+        [SerializeField] private Animator pickupBar;
         private Heart[] hearts;
         
         [Header("Body parts")]
@@ -131,10 +132,10 @@ namespace UI
 
 
         public void UpdatePlayer(Logic.Player previousPlayerState,
-            Logic.Player currentPlayerState, LevelSettings levelSettings, LevelLogicManager manager)
+            Logic.Player currentPlayerState, LevelSettings levelSettings, Logic.Grid grid,
+             LevelLogicManager manager)
         {
             logicManager = manager;
-            //Debug.Log(isWalking);
             
             //direction
             if(currentPlayerState.orientation != previousPlayerState.orientation)
@@ -142,11 +143,20 @@ namespace UI
                 updateDirection(currentPlayerState.orientation);
             }
 
+            //weed
+            if(manager.WeedPickupProgression(currentPlayerState,grid) > 0f)
+            {
+                pickupBar.SetTrigger("Start");
+            }
+
             //walking or not
-            playerAnimator.SetBool("IsWalking",true);
+            //playerAnimator.SetBool("IsWalking",true);
             if (manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
             {
                 playerAnimator.SetBool("IsWalking", manager.IsPlayerMoving(currentPlayerState));
+                
+                if(manager.IsPlayerMoving(currentPlayerState))
+                    pickupBar.SetTrigger("Stop");
             }
             
             //trigger dotween animation
@@ -194,7 +204,7 @@ namespace UI
             {
                 updateAmmo(currentPlayerState.Ammo);
             }
-
+            
         }
 
         private Vector2 BoardCenter(LevelSettings settings)
