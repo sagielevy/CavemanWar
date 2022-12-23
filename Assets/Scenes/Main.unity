@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundFirePrefab: {fileID: 936983270864893514, guid: e62129dd5832f4427b26c4ed6debcbc6, type: 3}
   LevelSettings:
-    WeedBurnTime: 0.3
+    WeedBurnTime: 1
     GroundBurnTime: 0.15
     WeedPickupTime: 0.15
     WeedCatchFireTime: 0.2
