@@ -168,9 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSettings:
-    WeedBurnTime: 1
+    WeedBurnTime: 2
     GroundBurnTime: 0.5
-    WeedPickupTime: 0.4
+    WeedPickupTime: 1.5
     WeedCatchFireTime: 0.3
     FlamethrowerRange: 3
     AttackCooldown: 1.5

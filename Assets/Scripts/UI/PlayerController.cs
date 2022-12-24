@@ -133,7 +133,7 @@ namespace UI
 
         public void UpdatePlayer(Logic.Player previousPlayerState,
             Logic.Player currentPlayerState, LevelSettings levelSettings, Logic.Grid grid,
-             LevelLogicManager manager)
+            LevelLogicManager manager)
         {
             logicManager = manager;
             
