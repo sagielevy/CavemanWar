@@ -196,6 +196,9 @@ namespace UI
                     bodyFront.SetActive(false);
                     topAnimator.SetTrigger("Die");
                     
+                    //workaround to not being centered right
+                    transform.DOComplete();
+                    transform.DOMove(transform.position + new Vector3(0f,1f,0f),0f);
                     SFXmanager.playDie();
                 }
             }
