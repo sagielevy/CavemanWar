@@ -2,6 +2,7 @@
 using System.Collections;
 using Logic;
 using System;
+using DG.Tweening;
 
 namespace UI
 {
@@ -79,7 +80,9 @@ namespace UI
                 var playerDeadIndex = LevelLogicManager.
                     IsPlayerDead(LevelState.player1) ? 2 : 1;
                 gameOverCanvas.SetPlayerName(playerDeadIndex);
-                gameOverCanvas.Fade(1);
+
+                DOTween.Sequence().SetDelay(1.5f)
+                    .OnComplete(() => gameOverCanvas.Fade(1));
             }
         }
 
