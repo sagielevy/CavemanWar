@@ -48,7 +48,7 @@ namespace UI
                     switch (tile)
                     {
                         case Logic.Weed:
-                            grid[i, j] = MakeWeed(index, parent, settings);
+                            grid[i, j] = MakeWeed(index, parent, settings, 0);
                             break;
                         case Logic.Rock:
                             grid[i, j] = MakeRock(index, parent, settings);
@@ -91,14 +91,20 @@ namespace UI
         }
 
         public Transform MakeWeed(Vector2Int index, Transform parent,
-            LevelSettings settings)
+            LevelSettings settings, float fadeInDuration)
         {
             var boardCenter = BoardCenter(settings);
             var position = new Vector3(index.x - boardCenter.x,
                 index.y - boardCenter.y);
 
-            return Instantiate(WeedPrefab, position,
-                Quaternion.identity, parent).transform;
+            var go = Instantiate(WeedPrefab, position,
+                Quaternion.identity, parent);
+            var fadeTile = go.GetComponent<FadeableTile>();
+
+            fadeTile.SetOpacity(0);
+            fadeTile.Fade(1, fadeInDuration);
+
+            return go.transform;
         }
 
         public Transform MakeGroundFire(Vector2Int index, Transform parent,

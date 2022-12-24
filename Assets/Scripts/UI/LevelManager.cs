@@ -11,6 +11,8 @@ namespace UI
         [SerializeField] private LevelSettings LevelSettings;
         [SerializeField] private MainMenu mainMenu;
         [SerializeField] private GameOverCanvas gameOverCanvas;
+        [SerializeField] private float weedFadeOutTime = 0.4f;
+        [SerializeField] private float weedFadeInTime = 0.3f;
 
         private LevelGenerator LevelObjectsGenerator;
         private Logic.LevelLogicManager LevelLogicManager;
@@ -170,14 +172,16 @@ namespace UI
                         BurnableTile burnableGameTile = grid[i, j].GetComponent<BurnableTile>();
 
                         if (LevelLogicManager.IsTileBurning(prevBurnableTile) !=
-                            LevelLogicManager.IsTileBurning(currBurnableTile))
+                            LevelLogicManager.IsTileBurning(currBurnableTile) &&
+                            burnableGameTile != null)
                         {
                             burnableGameTile.Burn(LevelLogicManager.IsTileBurning(currBurnableTile));
                         }
 
                         if (prevTile is Logic.Weed && currTile is Logic.Ground)
                         {
-                            Destroy(grid[i, j].gameObject);
+                            var fadeableWeed = grid[i, j].GetComponent<FadeableTile>();
+                            fadeableWeed.FadeOutAndDestroy(weedFadeOutTime);
                             grid[i, j] = LevelObjectsGenerator.MakeGroundFire(new Vector2Int(i, j),
                                 transform, LevelSettings);
                         }
@@ -185,7 +189,7 @@ namespace UI
                         {
                             Destroy(grid[i, j].gameObject);
                             grid[i, j] = LevelObjectsGenerator.MakeWeed(new Vector2Int(i, j),
-                                transform, LevelSettings);
+                                transform, LevelSettings, weedFadeInTime);
                         }
                     }
                 }

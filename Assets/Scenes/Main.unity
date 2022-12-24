@@ -189,6 +189,8 @@ MonoBehaviour:
     GridHeight: 8
   mainMenu: {fileID: 1701732816}
   gameOverCanvas: {fileID: 1446262627}
+  weedFadeOutTime: 0.4
+  weedFadeInTime: 0.3
 --- !u!1001 &421542270
 PrefabInstance:
   m_ObjectHideFlags: 0

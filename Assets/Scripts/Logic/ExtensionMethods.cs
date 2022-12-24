@@ -17,6 +17,11 @@ namespace Logic
             };
         }
 
+        public static Color WithAlpha(this Color color, float alpha)
+        {
+            return new Color(color.r, color.g, color.b, alpha);
+        }
+
         public readonly static Vector2Int[] AllDirectionVectors = Enum.GetValues(typeof(Direction))
             .Cast<Direction>().Select(x => x.Vector()).ToArray();
     }
