@@ -71,6 +71,11 @@ namespace Logic
             {
                 return MovePlayer(playerState, moveDirection);
             }
+            else
+            {
+                playerState.orientation = moveDirection;
+            }
+
             return playerState;
         }
         
