@@ -181,7 +181,7 @@ namespace UI
                         if (prevTile is Logic.Weed && currTile is Logic.Ground)
                         {
                             var fadeableWeed = grid[i, j].GetComponent<FadeableTile>();
-                            fadeableWeed.FadeOutAndDestroy(weedFadeOutTime);
+                            fadeableWeed?.FadeOutAndDestroy(weedFadeOutTime);
                             grid[i, j] = LevelObjectsGenerator.MakeGroundFire(new Vector2Int(i, j),
                                 transform, LevelSettings);
                         }

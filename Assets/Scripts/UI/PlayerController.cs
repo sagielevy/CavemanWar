@@ -16,7 +16,7 @@ namespace UI
         [SerializeField] private Animator pickupBar;
         [SerializeField] private Animator topAnimator;
         private Heart[] hearts;
-        
+
         [Header("Body parts")]
         [SerializeField] private GameObject bodySide;
         [SerializeField] private GameObject bodyFront;
@@ -61,9 +61,9 @@ namespace UI
             if (isWalking)
             {
                 stepSfxTimer -= Time.deltaTime;
-                
+
                 //play sfx
-                if(stepSfxTimer <= 0f)
+                if (stepSfxTimer <= 0f)
                 {
                     stepSfxTimer = stepSfxTimerMax;
                     SFXmanager.playStep();
@@ -73,7 +73,7 @@ namespace UI
 
         private void UpdateAmmo(int ammoCount)
         {
-            for(var i=0; i < ammoSlots.Length; i++)
+            for (var i = 0; i < ammoSlots.Length; i++)
             {
                 ammoSlots[i].enabled = i < ammoCount;
             }
@@ -81,53 +81,53 @@ namespace UI
         private void updateDirection(Direction dir)
         {
             //reset rotation
-            sideTrans.localScale = new Vector3(1,1,1);
+            sideTrans.localScale = new Vector3(1, 1, 1);
 
-            switch(dir)
+            switch (dir)
             {
                 case Direction.Up:
                     bodyBack.SetActive(true);
                     bodyFront.SetActive(false);
                     bodySide.SetActive(false);
 
-                    flamethrowerAnimator.SetBool("IsHorizontal",false);
+                    flamethrowerAnimator.SetBool("IsHorizontal", false);
                     flameTrans.localPosition = Vector3.up * flamethrowerLocalDistance;
                     flameTrans.localRotation = Quaternion.identity;
-                break;
+                    break;
                 //////////
                 case Direction.Down:
                     bodyBack.SetActive(false);
                     bodyFront.SetActive(true);
                     bodySide.SetActive(false);
 
-                    flamethrowerAnimator.SetBool("IsHorizontal",false);
+                    flamethrowerAnimator.SetBool("IsHorizontal", false);
                     flameTrans.localPosition = Quaternion.Euler(0, 0, 180) * Vector3.up * flamethrowerLocalDistance;
                     flameTrans.localRotation = Quaternion.Euler(0, 0, 180);
-                break;
+                    break;
                 /////////
                 case Direction.Right:
                     bodyBack.SetActive(false);
                     bodyFront.SetActive(false);
                     bodySide.SetActive(true);
 
-                    flamethrowerAnimator.SetBool("IsHorizontal",true);
+                    flamethrowerAnimator.SetBool("IsHorizontal", true);
                     flameTrans.localPosition = Vector3.right * flamethrowerLocalDistance;
                     flameTrans.localRotation = Quaternion.identity;
-                break;
+                    break;
                 /////////
                 case Direction.Left:
                     bodyBack.SetActive(false);
                     bodyFront.SetActive(false);
                     bodySide.SetActive(true);
 
-                    flamethrowerAnimator.SetBool("IsHorizontal",true); 
-                    
+                    flamethrowerAnimator.SetBool("IsHorizontal", true);
+
                     flameTrans.localPosition = Quaternion.Euler(0, 0, 180) * Vector3.right * flamethrowerLocalDistance;
                     flameTrans.localRotation = Quaternion.Euler(0, 0, 180);
-                    sideTrans.localScale = new Vector3(-1,1,1);
-                break;
+                    sideTrans.localScale = new Vector3(-1, 1, 1);
+                    break;
             }
-            
+
         }
 
 
@@ -136,36 +136,42 @@ namespace UI
             LevelLogicManager manager)
         {
             logicManager = manager;
-            
+
             //direction
-            if(currentPlayerState.orientation != previousPlayerState.orientation)
+            if (currentPlayerState.orientation != previousPlayerState.orientation)
             {
                 updateDirection(currentPlayerState.orientation);
             }
 
-            //weed
-            if(manager.WeedPickupProgression(currentPlayerState, grid) > 0 &&
-               manager.WeedPickupProgression(previousPlayerState, grid) < float.Epsilon)
-            {
-                pickupBar.SetTrigger("Start");
-            }
-
-            //walking or not
-            if (manager.IsPlayerMoving(currentPlayerState) != manager.IsPlayerMoving(previousPlayerState))
+            if (manager.IsPlayerMoving(currentPlayerState) !=
+                manager.IsPlayerMoving(previousPlayerState))
             {
                 var val = manager.IsPlayerMoving(currentPlayerState);
                 frontAnimator.SetBool("IsWalking", val);
                 backAnimator.SetBool("IsWalking", val);
                 sideAnimator.SetBool("IsWalking", val);
-                
-                if(manager.IsPlayerMoving(currentPlayerState))
-                {
-                    pickupBar.SetTrigger("Stop");
-                }
             }
-            
+
+            var startedWalking = manager.IsPlayerMoving(currentPlayerState) &&
+                !manager.IsPlayerMoving(previousPlayerState);
+
+            var isPickingWeed = manager.WeedPickupProgression(currentPlayerState, grid) > 0;
+            var wasNotPickingWeed = manager.WeedPickupProgression(previousPlayerState, grid) < float.Epsilon;
+
+            var wasPickingWeed = manager.WeedPickupProgression(previousPlayerState, grid) > 0;
+            var isNotPickingWeed = manager.WeedPickupProgression(currentPlayerState, grid) < float.Epsilon;
+
+            if (isPickingWeed && (wasNotPickingWeed || startedWalking))
+            {
+                pickupBar.SetTrigger("Start");
+            }
+            else if (wasPickingWeed && (isNotPickingWeed || startedWalking))
+            {
+                pickupBar.SetTrigger("Stop");
+            }
+
             //trigger dotween animation
-            if(currentPlayerState.position != previousPlayerState.position)
+            if (currentPlayerState.position != previousPlayerState.position)
             {
                 Vector2Int dest = currentPlayerState.position;
                 var boardCenter = BoardCenter(levelSettings);
@@ -195,27 +201,27 @@ namespace UI
                     bodyBack.SetActive(false);
                     bodyFront.SetActive(false);
                     topAnimator.SetTrigger("Die");
-                    
+
                     //workaround to not being centered right
                     transform.DOComplete();
-                    transform.DOMove(transform.position + new Vector3(0f,1f,0f),0f);
+                    transform.DOMove(transform.position + new Vector3(0f, 1f, 0f), 0f);
                     SFXmanager.playDie();
                 }
             }
 
             //shoot
-            if(currentPlayerState.TimeSinceLastAttack < previousPlayerState.TimeSinceLastAttack)
+            if (currentPlayerState.TimeSinceLastAttack < previousPlayerState.TimeSinceLastAttack)
             {
                 SFXmanager.playShoot();
                 flamethrowerAnimator.SetTrigger("Burn");
             }
 
             //ammo
-            if(currentPlayerState.Ammo != previousPlayerState.Ammo)
+            if (currentPlayerState.Ammo != previousPlayerState.Ammo)
             {
                 UpdateAmmo(currentPlayerState.Ammo);
             }
-            
+
         }
 
         private Vector2 BoardCenter(LevelSettings settings)
